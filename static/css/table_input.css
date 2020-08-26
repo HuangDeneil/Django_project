@@ -1,0 +1,45 @@
+table {
+  font-family: 微軟正黑體, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  color: #000000;
+}
+
+td, th {
+  border: 1px solid ##dddddd ;
+  text-align: left;
+  padding: 2px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.error {color: #FF0000;}
+
+.textarea_typ1
+{
+    border:1px solid #999999;
+    width:95%;
+    margin:5px 0;
+    padding:1%;
+}
+
+.input_type1
+{
+    border:1px solid #999999;
+    width:50%;
+    margin:6px 0;
+    padding:1%;
+}
+
+.select_type1
+{
+    border:1px solid #999999;
+    width:50%;
+    margin:5px 0;
+    padding:1%;
+}
+h1, h2, h3, h4, h5, p, div {
+font-family: 微軟正黑體;
+}
+

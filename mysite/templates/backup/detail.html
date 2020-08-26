@@ -1,0 +1,42 @@
+<!-- detail.html (project project) -->
+
+{% extends "base.html" %}
+
+{% block title %}
+    {{gene_info.specise_name | default:"找不到指定的資料"}}
+{% endblock %}
+
+{% block content %}
+
+<div class='container' align=center>
+
+        {% if gene_info %}
+            <table>
+                <tr>
+                    <td align=center><h3>{{ gene_info.specise_name }}</h3></td>
+                </tr>
+                <tr>
+                    <td align=center>{{ gene_info.scientific_name }}</td>
+                </tr>
+                <tr>
+                    <td align=center>{{ gene_info.description }}</td>
+                </tr>
+    <!--
+                {% for image in images %}
+                        {% if forloop.first %}
+                            <tr><td align=center> 
+                        {% endif %}
+                            <img src='{{ image.url }}' width=350><br>
+                        {% if forloop.last %}</td></tr>
+
+                        {% endif %}
+                    {% empty %}
+                    <tr><td align=center>暫無圖片</td></tr>
+                {% endfor %}
+    -->
+            </table>
+        {% else %}
+                <h2>找不到指定的資訊</h2>
+        {% endif %}
+</div>
+        {% endblock %}

@@ -1,0 +1,41 @@
+<!-- index.html (project project) -->
+    {% extends "base.html" %}
+    {% block title %} 物種資料庫{% endblock %}
+    {% block bottum %} <a href="homepage" class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:120%">Back</a> {% endblock %}
+    {% block header %} LIST ALL LIBRARIES{% endblock %}
+    {% block content %}
+
+
+<div style="width:1500px; margin:0 auto;">
+        <!-- 這裡放我們要呈現的內容 -->
+    {% for g in info %}
+            {% if forloop.first %}
+                <table>
+                    <tr bgcolor='#fdfbfc'>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:170%">DB id</td>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:170%">Organism Name</td>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:170%">Genus</td>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:170%">Type</td>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:170%">Source</td>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:170%">Key words</td>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%">更新日期</td>
+                    </tr>
+            {% endif %}
+                    <tr bgcolor='{% cycle "#dadee8" "#fdfbfc" %}'>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%">{{ g.db_id }}</td>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%">{{ g.orgranism_name }}</td>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%">{{ g.genus }}</td>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%">{{ g.top_type }}</td>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%">{{ g.source }}</td>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%">{{ g.key_word }}</td>
+                        <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%">{{ g.date  }}</td>
+                    </tr>
+            {% if forloop.last %}
+                </table>
+            {% endif %}
+            
+            {% empty %}
+    {% endfor %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,34 @@
+<!-- index.html (project project) -->
+    {% extends "base.html" %}
+    {% block title %} 物種資料庫{% endblock %}
+    {% block content %}
+
+<div class='container' align=center>
+        <!-- 這裡放我們要呈現的內容 -->
+    {% for g in info %}
+            {% if forloop.first %}
+                <table>
+                    <tr bgcolor='#cccccc'>
+                        <td width=250>學名</td>
+                        <td width=250>物種</td>
+                        <td width=300>說明</td>
+                        <td width=100>更新日期</td>
+                    </tr>
+            {% endif %}
+
+                    <tr bgcolor='{% cycle "#dadee8" "#fdfbfc" %}'>
+                        <td>{{ g.n_scientific }}</td>
+                        <td>{{ g.n_specise }}</td>
+                        <td>{{ g.description }}</td>
+                        <td>{{ g.date  }}</td>
+                    </tr>
+            {% if forloop.last %}
+                </table>
+            {% endif %}
+            
+            {% empty %}
+            <h3>查無資料......</h3>
+    {% endfor %}
+</div>
+{% endblock %}
+
