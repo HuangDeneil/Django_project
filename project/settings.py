@@ -25,7 +25,7 @@ SECRET_KEY = 'i_oxyseih=y2x*)f@knum03)&v=7sf5pvpdk!_s5ur#nztz^t6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.3.189']
+ALLOWED_HOSTS = ['192.168.3.189','084a86848c12.ngrok.io']
 
 
 # Application definition
@@ -137,4 +137,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-
+LOGIN_REDIRECT_URL = '/'

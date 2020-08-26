@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from mysite import models
 from datetime import datetime
 
@@ -25,16 +25,16 @@ def manage(request):
     now = datetime.now()
     return render(request, './content/manage.html', locals())
 
-def login(request):
-    return render(request, './content/login.html')
+def login_action(request):
     if request.method == 'POST':
         username = request.POST.get('username','')
         password = request.POST.get('password','')
         if username == 'hudeneil' and password == '78369906':
             return HttpResponse('login success!')
         else:
-            return render(request,'./content/login.html', {'error' : 'username or password error!'})
-    
+            return render(request,'login.html', {'error' : 'username or password error!'})
+
+        
 
 # def detail(request, id):
 #     try:

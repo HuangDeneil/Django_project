@@ -1,18 +1,28 @@
 <!-- index.html (project project) -->
     {% extends "base.html" %}
     {% block title %} 物種資料庫 login{% endblock %}
-    {% block header %} Login{% endblock %}
+    {% block header %} {% endblock %}
     {% block content %}
     {% load static %}
 
 
 <div id="wrapper" class="container" align='center'>
-    <form method="post" atcion="hompage"></br></br>
+    <form method="post" action="{% url 'login' %}"></br></br>
+        {% csrf_token %}
         <div id="logo" class="container"><h1><span class="icon icon-lock icon-size" ></span>The login interface:</br></h1></div>
         <input name="username" type="text" placeholder="username"></br>
         <input name="paasword" type="text" placeholder="password"></br>
+        <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
         <button id="btn" type="submit">login</button>
-        {% csrf_token %}
     </form>
 </div>
 {% endblock %}
