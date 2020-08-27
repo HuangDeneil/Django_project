@@ -25,7 +25,7 @@ SECRET_KEY = 'i_oxyseih=y2x*)f@knum03)&v=7sf5pvpdk!_s5ur#nztz^t6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.3.189','084a86848c12.ngrok.io']
+#ALLOWED_HOSTS = ['192.168.3.189','084a86848c12.ngrok.io']
 
 
 # Application definition
@@ -45,7 +45,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -86,8 +86,8 @@ DATABASES = {
        "default": {
        "ENGINE": "django.db.backends.mysql",
        "NAME": "django_project",
-       "USER": "hudeneil",
-       "PASSWORD": "78369906",
+       "USER": "root",
+       "PASSWORD": "",
        "HOST": "localhost",
        "PORT": "3307",
        'OPTIONS': {

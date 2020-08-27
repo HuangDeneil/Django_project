@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div id="wrapper" class="container">
+  	<div id="menu" class="container">
+		<ul>
+			<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
+			<li><a href="#" accesskey="1" title="">Services (No function)</a></li>
+			<li><a href="#" accesskey="5" title="">Contact Us (No function)</a></li>   
+      <li><a href="{% url 'login' %}">Login</a></li>
+
+        </ul>
+	</div>
+
+  <div id="three-column" class="container">
+      <p>You are Logged out! <br>
+      Click here to login again.
+      </p>
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -22,21 +22,21 @@ from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('', views.index),
+    #path('', views.login_action),
     path('homepage', views.index),
     path('db', views.reference_summary),
     path('new_input', views.new_input),
     path('search_engine', views.search_engine),
-    url(r'^login/$', views.login_action),
+    #path('login', views.login_action),
     #path('manage', admin.site.urls),
-    path('accounts', include('django.contrib.auth.urls')),
-    path('', TemplateView.as_view(template_name='./content/homepage.html'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('', TemplateView.as_view(template_name='home.html')),
+    path('logout', views.logout),
+    #path('', TemplateView.as_view(template_name='./content/homepage.html'))
     
     ### OAuth2 setting
     #path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     ### using re_path
     #re_path(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    
-    
     #path('detail/<int:id>', views.detail, name = 'detail-url'),
 ]
