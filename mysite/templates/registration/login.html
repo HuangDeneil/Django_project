@@ -5,19 +5,18 @@
     {% block content %}
     {% load static %}
 
-<div id="wrapper" class="container">
-
+<div id="wrapper" class="container" align="center" >
 
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<h1>Your username and password didn't match. Please try again.</h1>
 {% endif %}
 
 {% if next %}
     {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
+    <h1>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</h1>
     {% else %}
-    <p>Please login to see this page.</p>
+    <h1>Please login to see this page.</h1>
     {% endif %}
 {% endif %}
 
@@ -25,13 +24,12 @@
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
 
+
 <div>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</div>
-<div>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
+    </br></br>
+    <h2>{{ form.username.label_tag }} : {{ form.username }}</h2>
+    <h2>{{ form.password.label_tag }} : {{ form.password }}</h2>
+
 </div>
 
 <div>

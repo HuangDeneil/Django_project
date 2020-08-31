@@ -16,7 +16,7 @@
 -->
 <body>
 
-
+{% if user.is_authenticated %}
 <!-- Table region  -->
 <div id="wrapper" class="container" >
 <form name="table_value" method="POST" action="search_engine">
@@ -201,6 +201,9 @@ _ matches exactly one character.
       ?>-->
 </div>
 </body>
+{% else %}
+    {% include "login_direction.html" %}
+{% endif %}
 {% endblock %}
 </html>
 

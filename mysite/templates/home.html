@@ -13,10 +13,9 @@
 	<div id="menu" class="container">
 		<ul>
 			<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
-			<li><a href="#" accesskey="1" title="">Services (No function)</a></li>
+			<li><a href="#" accesskey="2" title="">Services (No function)</a></li>
 			<li><a href="#" accesskey="5" title="">Contact Us (No function)</a></li>   
-           <li><a href='logout'>Logout</a></li>
-
+            <li><a href="accounts/logout/">Logout</a></li>
         </ul>
 	</div>
         <div id="three-column" class="container">
@@ -56,22 +55,7 @@
 		</div>
 </div>
 {% else %}
-<div id="wrapper" class="container">
-	<div id="menu" class="container">
-		<ul>
-			<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
-			<li><a href="#" accesskey="1" title="">Services (No function)</a></li>
-			<li><a href="#" accesskey="5" title="">Contact Us (No function)</a></li>   
-            <li><a href="{% url 'login' %}">Login</a></li>
-        
-        </ul>
-	</div>
-
-<p>You are not logged in</p>
-
-
-</div>
-
+    {% include "login_direction.html" %}
 {% endif %}
         
 {% endblock %}

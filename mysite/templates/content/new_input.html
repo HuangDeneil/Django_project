@@ -6,7 +6,7 @@
     {% block content %}
 
 <body>
-
+{% if user.is_authenticated %}
 <!-- Table region  -->
 <div id="wrapper" class="container">
   <form method="POST" action="query.php">
@@ -153,7 +153,7 @@
     </tr>
     <tr>
       <td>&ensp;資訊來源:</br>&ensp;source</td>
-      <td><input class=input_type1 type="text" name="source"><p>ex: Halos, from someone</p></td>
+      <td><input class=input_type1 type="text" name="source" value="{{ user.username }}"><p></p></td>
       <td>&ensp;species_taxid:</td>
       <td><input class=input_type1 type="text" name="species_taxid"></td>
     <tr>
@@ -236,7 +236,9 @@
 <input class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:300%" type="reset" value="清除">
 </p></br>
 </div>
-
+{% else %}
+    {% include "login_direction.html" %}
+{% endif %}
 {% endblock %}
 </html>
 

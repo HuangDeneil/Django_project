@@ -5,8 +5,9 @@
     {% block header %} LIST ALL LIBRARIES{% endblock %}
     {% block content %}
 
-
+{% if user.is_authenticated %}
 <div style="width:1500px; margin:0 auto;">
+    
         <!-- 這裡放我們要呈現的內容 -->
     {% for g in info %}
             {% if forloop.first %}
@@ -36,6 +37,11 @@
             
             {% empty %}
     {% endfor %}
-</div>
+    
+    </div>
+{% else %}
+    {% include "login_direction.html" %}
+{% endif %}
+
 {% endblock %}
 

@@ -25,7 +25,7 @@ SECRET_KEY = 'i_oxyseih=y2x*)f@knum03)&v=7sf5pvpdk!_s5ur#nztz^t6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['192.168.3.189','084a86848c12.ngrok.io']
+ALLOWED_HOSTS = ['192.168.3.189']
 
 
 # Application definition
@@ -86,8 +86,8 @@ DATABASES = {
        "default": {
        "ENGINE": "django.db.backends.mysql",
        "NAME": "django_project",
-       "USER": "root",
-       "PASSWORD": "",
+       "USER": "hudeneil",
+       "PASSWORD": "78369906",
        "HOST": "localhost",
        "PORT": "3307",
        'OPTIONS': {
@@ -138,3 +138,4 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
