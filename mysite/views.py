@@ -7,7 +7,7 @@ from django.contrib import auth
 
 def index(request):
     now = datetime.now()
-    return render(request, './content/homepage.html', locals())
+    return render(request, './content/home.html', locals())
 
 def reference_summary(request):
     info = models.reference_summary.objects.all()
@@ -22,7 +22,7 @@ def search_engine(request):
     now = datetime.now()
     return render(request, './content/search_engine.html', locals())
 
-def manage(request):
+def manage_page(request):
     info = models.reference_summary.objects.all()
     now = datetime.now()
     return render(request, './content/manage.html', locals())

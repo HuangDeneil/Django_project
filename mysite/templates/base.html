@@ -12,7 +12,17 @@
 <link href="{% static "css/fonts.css" %}" rel="stylesheet" type="text/css" media="all" />
 <script src="{% static "css/table_input.css" %}" rel="stylesheet" type="text/css" media="all" /></script>
 </head>
+
+
 <style>
+body {
+  background-image: url("{% static "images/APG-3.PNG" %}");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 18%;
+  }
+
 table {
   font-family: 微軟正黑體, sans-serif;
   border-collapse: collapse;
@@ -61,7 +71,7 @@ tr:nth-child(even) {
 <div id="logo" class="container">
   {% block bottum %} {% endblock %}
   <h1 style="font-family:微軟正黑體;text-transform:initial;font-size:300%"><span class="icon icon-lock icon-size"></span>物種資料庫<span>Loacl web system</span>
-  <h1 style="font-family:微軟正黑體;text-transform:initial;font-size:200%" >{% block header %}{% endblock %}</h1></h1>
+  <b><h1 style="font-family:微軟正黑體;text-transform:initial;font-size:130%" >&ensp;&ensp;{% block header %}{% endblock %}</h1></b></h1>
 </div>
 
 {% block content %}{% endblock %}

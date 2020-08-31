@@ -21,10 +21,14 @@ from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    # My django primary administry back-end
     path('admin/', admin.site.urls),
-    path('homepage', TemplateView.as_view(template_name='home.html')),
-    path('home', TemplateView.as_view(template_name='home.html')),
-    path('', TemplateView.as_view(template_name='home.html')),
+    
+    # My root page
+    path('homepage', TemplateView.as_view(template_name='./content/home.html')),
+    path('home', TemplateView.as_view(template_name='./content/home.html')),
+    path('Home', TemplateView.as_view(template_name='./content/home.html')),
+    path('', TemplateView.as_view(template_name='./content/home.html')),
     
     ## view db
     path('db', views.reference_summary),
@@ -35,16 +39,11 @@ urlpatterns = [
     ## search engine non-developer
     path('search_engine', views.search_engine),
     
+    # manage 
+    path('manage', views.manage_page),
+
     ## login interface
     path('accounts/', include('django.contrib.auth.urls')),
-    #path('logout', auth_views.PasswordChangeView.as_view() ),
-    path('accounts/logout', auth_views.LogoutView.as_view(template_name='login_direction.html')),
-
-    #path('', TemplateView.as_view(template_name='./content/homepage.html'))
-    #path('login', views.login_action),
-    #path('manage', admin.site.urls),
-    #path('logout', views.logout),
-
 
 
     ### OAuth2 setting

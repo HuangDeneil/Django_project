@@ -5,8 +5,8 @@
     {% block header %} 新增資料{% endblock %}
     {% block content %}
 
-<body>
 {% if user.is_authenticated %}
+
 <!-- Table region  -->
 <div id="wrapper" class="container">
   <form method="POST" action="query.php">

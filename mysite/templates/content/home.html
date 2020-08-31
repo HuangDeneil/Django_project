@@ -1,20 +1,31 @@
 <!-- index.html (project project) -->
     {% extends "base.html" %}
-    {% block title %} 物種資料庫{% endblock %}
-	{% block header %} {% endblock %}
-    {% block content %}
+
+{% block title %}HomePage{% endblock %}
+{% block header %} Homepage{% endblock %}
+
+{% block content %}
 
 
+{% if user.is_authenticated %}
+        
 <div id="wrapper" class="container">
 	<div id="menu" class="container">
 		<ul>
 			<li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
-			<li><a href="#" accesskey="1" title="">Services (No function)</a></li>
-			<li><a href="#" accesskey="5" title="">Contact Us (No function)</a></li>
-		</ul>
+			<li><a href="#" accesskey="2" title="">Services (No function)</a></li>
+			<li><a href="#" accesskey="5" title="">Contact Us (No function)</a></li>   
+            <li><a href="accounts/logout/">Logout</a></li>
+        </ul>
 	</div>
-	<div id="three-column" class="container">
-		<div><span class="arrow-down"></span></div>
+        <div id="three-column" class="container">
+           <p> 
+                Hello, {{ user.username }}!<br>
+                You are login now ~
+           <p>
+        </div>
+
+        <div id="three-column" class="container">
 		<div id="tbox1"> <span class="icon icon-list"></span>
 			<div class="title">
 				<h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">所有物種表格</h2>
@@ -39,10 +50,13 @@
 			<div class="title">
 				<h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">後台管理</h2>
 			</div>
-			<p style="font-family:微軟正黑體;text-transform:initial;font-size:100%">資料庫登陸 & 訂單刪除</p>
+			<p style="font-family:微軟正黑體;text-transform:initial;font-size:100%">資料庫管理介面登陸</p>
 			<a href="manage" class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:150%">Management</a> 
 		</div>
 </div>
-
+{% else %}
+    {% include "login_direction.html" %}
+{% endif %}
+        
 {% endblock %}
 
