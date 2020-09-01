@@ -48,10 +48,11 @@ ALLOWED_HOSTS = ['XXX.XXX.XXX.XXX']
 ```
 
 #### Start Web service:
-```python
-pyhton manage.py runserver 0.0.0.0:8000
-```
 
+```python
+python manage.py runserver 0.0.0.0:8000
+```
+<br>
 
 
 
