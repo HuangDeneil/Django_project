@@ -26,6 +26,17 @@ def search_result(request):
     return render(request, './content/search_result.html', locals())
 
 
+## data
+def data_detail(request):
+    try:
+        p = reference_summary.objects.get(db_id=db_id)
+    except reference_summary.DoesNotExist:
+        raise Http404('Cannot found objects')
+    return render(request, 'disp.html', locals())
+
+
+
+
 
 '''
 def login(request):
