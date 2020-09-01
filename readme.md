@@ -42,7 +42,9 @@ DATABASES = {
 ```
 <br>
 ####ip setting:
+
 `setting.py`
+
 ```python
 ALLOWED_HOSTS = ['XXX.XXX.XXX.XXX']
 ```
