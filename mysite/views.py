@@ -4,33 +4,28 @@ from mysite import models
 from datetime import datetime
 from django.contrib import auth
 
+## Login
+def logout(request):
+    auth.logout(request)
+    return render(request,'./registration/logged_out.html/')
 
-def index(request):
-    now = datetime.now()
-    return render(request, './content/home.html', locals())
-
+## View DB
 def reference_summary(request):
     info = models.reference_summary.objects.all()
     now = datetime.now()
     return render(request, './content/call_db.html', locals())
 
+## input new data 
 def new_input(request):
     now = datetime.now()
     return render(request, './content/new_input.html', locals())
 
-def search_engine(request):
+## Search db 
+def search_result(request):
     now = datetime.now()
-    return render(request, './content/search_engine.html', locals())
-
-def manage_page(request):
-    info = models.reference_summary.objects.all()
-    now = datetime.now()
-    return render(request, './content/manage.html', locals())
+    return render(request, './content/search_result.html', locals())
 
 
-def logout(request):
-    auth.logout(request)
-    return render(request,'./registration/logged_out.html/')
 
 '''
 def login(request):
@@ -52,17 +47,6 @@ def login(request):
 
     return render(request, 'blog/login.html')
 
-
-def logout(request):
-    auth.logout(request)
-    return render(request,'blog/logout.html')
-
-
-def admin_page(request):
-    if not request.user.is_authenticated():
-        return redirect('blog_login')
-
-    return render(request, 'blog/admin_page.html')
 '''
 
 

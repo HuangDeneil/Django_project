@@ -61,39 +61,40 @@
         </td>
         <td>&ensp;關鍵字:</br>&ensp;key word</td>
         <td>
-          </br>
+          <br>
           <h3>Aerobic/anaerobic:</h3>
-          <input type="checkbox" id="Strictly aerobic" name="Strictly aerobic" value="Strictly aerobic">
+          <input type="radio" id="Strictly aerobic" name="Aerobic_ablity" value="Strictly aerobic">
           <label for="Strictly aerobic">Strictly aerobic</label>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-          <input type="checkbox" id="Aerobic" name="Aerobic" value="Aerobic">
+          <input type="radio" id="Aerobic" name="Aerobic_ablity" value="Aerobic">
           <label for="Aerobic">Aerobic</label>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-          <input type="checkbox" id="Obligate_aerobe" name="Obligate_aerobe" value="Obligate_aerobe">
+          <input type="radio" id="Obligate_aerobe" name="Aerobic_ablity" value="Obligate_aerobe">
           <label for="Obligate_aerobe">Obligate_aerobe</label></br>
-          <input type="checkbox" id="Facultative anaerobic" name="Facultative anaerobic" value="Facultative anaerobic">
+          <input type="radio" id="Facultative anaerobic" name="Aerobic_ablity" value="Facultative anaerobic">
           <label for="Facultative anaerobic">Facultative anaerobic</label>&ensp;&ensp;&ensp;&ensp;
-          <input type="checkbox" id="Microaerophiles" name="Microaerophiles" value="Microaerophiles">
+          <input type="radio" id="Microaerophiles" name="Aerobic_ablity" value="Microaerophiles">
           <label for="Microaerophiles">Microaerophiles</label>&ensp;&ensp;&ensp;&ensp;
-          <input type="checkbox" id="Aerotolerant" name="Aerotolerant" value="Aerotolerant">
-          <label for="Aerotolerant">Aerotolerant</label>&ensp;&ensp;&ensp;&ensp;
-          <input type="checkbox" id="Anaerobic" name="Anaerobic" value="Anaerobic">
-          <label for="Anaerobic">Anaerobic</label>
-          </br></br>
-           
+          <input type="radio" id="Aerotolerant" name="Aerobic_ablity" value="Aerotolerant">
+          <label for="Aerotolerant">Aerotolerant</label>&ensp;&ensp;
+          <input type="radio" id="Anaerobic" name="Aerobic_ablity" value="Anaerobic">
+          <label for="Anaerobic">Anaerobic</label><br>
+          <input type="radio" id="unknown" name="Aerobic_ablity" value="unknown_aerobic_ablity">
+          <label for="unknown">Unknown (unknown aerobic ablity)</label>
+          <br><br>      
           
           <h3>Pathogenic:</h3>
           <input type="checkbox" id="pathogen" name="pathogen" value="pathogen">
           <label for="pathogen">pathogen</label>&ensp;&ensp;
-          <input type="checkbox" id="opportunistic pathogen" name="opportunistic pathogen" value="opportunistic pathogen">
-          <label for="opportunistic pathogen">opportunistic pathogen</label>&ensp;
-          <input type="checkbox" id="plant pathogen" name="plant pathogen" value="plant pathogen">
+          <input type="checkbox" id="opportunistic_pathogen" name="opportunistic_pathogen" value="opportunistic_pathogen">
+          <label for="opportunistic_pathogen">opportunistic pathogen</label>&ensp;
+          <input type="checkbox" id="plant_pathogen" name="plant_pathogen" value="plant_pathogen">
           <label for="plant pathogen">plant pathogen</label>&ensp;
-          <input type="checkbox" id="unkown pathogenic" name="unkown pathogenic" value="unkown pathogenic">
-          <label for="unkown pathogenic">unkown pathogenic</label>&ensp;
+          <input type="checkbox" id="unkown_pathogenic" name="unkown_pathogenic" value="unkown_pathogenic">
+          <label for="unkown_pathogenic">unkown pathogenic</label>&ensp;
           <br><br>
 
           <h3>Flora/environmental:</h3>
-          <input type="checkbox" id="normal flora" name="normal flora" value="normal flora">
-          <label for="normal flora">normal flora</label>
+          <input type="checkbox" id="normal_flora" name="normal_flora" value="normal_flora">
+          <label for="normal_flora">normal flora</label>
           <input type="checkbox" id="environmental" name="environmental" value="environmental">
           <label for="environmental">environmental</label>
           <br><br>
@@ -118,12 +119,14 @@
           <label for="acidophilic">acidophilic</label>&ensp;&ensp;&ensp;&ensp;
           <input type="checkbox" id="thermophilic" name="thermophilic" value="thermophilic">
           <label for="thermophilic">thermophilic</label>&ensp;&ensp;&ensp;
-          </br></br>
+          <input type="checkbox" id="halophilic" name="halophilic" value="halophilic">
+          <label for="halophilic">halophilic</label>&ensp;&ensp;&ensp;
+          </br></br> 
           
           <input type="checkbox" id="unkown" name="unkown" value="unkown">
-          <label for="unkown">unkown</label><br>
+          <label for="unkown">Unkown feature</label><br>
           </br><p>others:
-          <textarea class=textarea_typ1 type="text" name="key_word" id="key_word" rows="3" cols="80"></textarea><span class="error">* </span>
+          <textarea class=textarea_typ1 type="text" name="key_word" id="key_word" rows="3" cols="80"></textarea>
           </p>
         </td>
     </tr>
@@ -138,11 +141,31 @@
         </td>
     <td>&ensp;樣品來源</br>&ensp;Sample type:</td>
         <td>
-          <select class=select_type1 name="sample_type">
-            <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value=""></option>
-            <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value="positive">positive</option>
-            <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value="negative">negative</option>
-          </select>  <span class="error">* </span>
+          <input type="hidden" name="sample_type">
+
+          <input type="checkbox" id="blood" name="blood" value="blood">
+          <label for="blood">血液</label>&ensp;&ensp;&ensp;
+          <input type="checkbox" id="plasma" name="plasma" value="plasma">
+          <label for="plasma">血漿</label>&ensp;&ensp;&ensp;
+          <input type="checkbox" id="CSF" name="CSF" value="CSF">
+          <label for="CSF">腦脊髓液</label>&ensp;&ensp;
+          <input type="checkbox" id="BLAF" name="BLAF" value="BLAF">
+          <label for="BLAF">肺泡灌洗液</label>&ensp;&ensp;
+          <input type="checkbox" id="sputum" name="sputum" value="sputum">
+          <label for="sputum">痰液</label>&ensp;<br>
+          <input type="checkbox" id="pleural_fluid" name="pleural_fluid" value="pleural_fluid">
+          <label for="pleural_fluid">胸水</label>&ensp;&ensp;&ensp;
+          <input type="checkbox" id="ascites" name="ascites" value="ascites">
+          <label for="ascites">腹水</label>&ensp;&ensp;&ensp;
+          <input type="checkbox" id="positive_conpare" name="positive_conpare" value="positive_conpare">
+          <label for="positive_conpare">陽性對照</label>&ensp;&ensp;
+          <input type="checkbox" id="negative_conpare" name="negative_conpare" value="negative_conpare">
+          <label for="negative_conpare">陰性對照</label>&ensp;&ensp;&ensp;&ensp;
+          <input type="checkbox" id="tissue" name="tissue" value="tissue">
+          <label for="tissue">組織</label>&ensp;&ensp;&ensp;
+          <input type="checkbox" id="others" name="others" value="others">
+          <label for="others">其它</label>&ensp;&ensp;
+          <br>
         </td>
     </tr>
     <tr>
@@ -153,7 +176,7 @@
     </tr>
     <tr>
       <td>&ensp;資訊來源:</br>&ensp;source</td>
-      <td><input class=input_type1 type="text" name="source" value="{{ user.username }}"><p></p></td>
+      <td><input type="hidden" name="source" value="{{ user.username }}"><p>{{ user.username }}</p></td>
       <td>&ensp;species_taxid:</td>
       <td><input class=input_type1 type="text" name="species_taxid"></td>
     <tr>

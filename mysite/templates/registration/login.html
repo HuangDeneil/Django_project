@@ -27,8 +27,9 @@
 
 <div>
     </br></br>
-    <h2>{{ form.username.label_tag }} : {{ form.username }}</h2>
-    <h2>{{ form.password.label_tag }} : {{ form.password }}</h2>
+    <h2>&ensp;{{ form.username.label_tag }}{{ form.username }}</h2>
+    <h2>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+    {{ form.password.label_tag }}{{ form.password }}</h2>
 
 </div>
 
@@ -39,7 +40,7 @@
 </form>
 
 {# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+<p>如果忘記密碼請通知管理員</p>
 
 </div>
 

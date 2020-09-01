@@ -37,10 +37,11 @@ urlpatterns = [
     path('new_input', views.new_input),
     
     ## search engine non-developer
-    path('search_engine', views.search_engine),
+    path('search_engine', TemplateView.as_view(template_name='./content/search_engine.html')),
+    path('search_result', views.search_result),
     
     # manage 
-    path('manage', views.manage_page),
+    path('manage',TemplateView.as_view(template_name='./content/manage.html')),
 
     ## login interface
     path('accounts/', include('django.contrib.auth.urls')),
