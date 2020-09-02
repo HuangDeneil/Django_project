@@ -22,7 +22,7 @@ TIME_ZONE = 'Asia/Taipei'
 ```
 
 <br><br>
-####we change the defualt database from sqlite to MySQL
+#### We change the defualt database from sqlite to MySQL
 Its means need to edited `setting.py` in the first time before start 
 web service.
 ```python
@@ -41,7 +41,7 @@ DATABASES = {
 }
 ```
 <br>
-####ip setting:
+#### ip setting:
 
 `setting.py`
 
