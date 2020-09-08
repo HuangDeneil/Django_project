@@ -47,6 +47,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 
 
+    path('restaurants_list', views.list_restaurants),
+    path('restaurants_list/', views.list_restaurants),
     ### OAuth2 setting
     #path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     ### using re_path

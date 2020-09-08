@@ -10,7 +10,7 @@
 {% if user.is_authenticated %}
 <!-- Table region  -->
 <div id="wrapper" class="container" >
-<form name="table_value" method="POST" action="search_result"> {% csrf_token %}
+<form name="table_value" method="POST" action="search_engine"> {% csrf_token %}
   <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">&ensp;查詢</h2>
   <svg height="7" width="1200"><line x1="0" y1="0" x2="1300" y2="0" style="stroke:rgb(0,150,255);stroke-width:2" /></svg>
  <table>
@@ -39,13 +39,11 @@
             <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value="data_status">data_status</option>
         </select>
     </td>
-      <td><input class=input_type1  type="text" name="input" rows="3" cols="130"></td>
-      <td></td>
+      <td><input class=input_type1  type="text" name="input" style="font-family:微軟正黑體;text-transform:initial;font-size:130%"></td>
+      <td><input class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:300%" type="submit" value="Search"><br></td>
     </tr>
   </table>
 
-
-<input class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:300%" type="submit" value="送出">
 </br>
 <!--
 <?php

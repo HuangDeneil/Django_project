@@ -35,8 +35,23 @@ def data_detail(request):
     return render(request, 'disp.html', locals())
 
 
+from django.shortcuts import render
+def comment(request, id):
+    if id:
+        r = Restaurant.objects.get(id=id)
+    else:
+        return HttpResponseRedirect("restaurants_list")
+    if request.POST:
+        visitor = request.POST['visitor']
+        content = request.POST['content']
+        email = request.POST['email']
+        date_time = timezone.localtime(timezone.now()) # 擷取現在時間
+        Comment.objects.create(visitor=visitor, email=email, content=content, date_time=date_time, restaurant=r)
+    return render(request, 'comments.html', locals())
 
-
+def list_restaurants(request):
+    restaurants = models.Restaurant.objects.all()
+    return render_to_response('./restaurants_list.html', locals())
 
 '''
 def login(request):
