@@ -9,7 +9,7 @@
 
 <!-- Table region  -->
 <div id="wrapper" class="container">
-  <form action="new_input_check" method="POST" >{% csrf_token %}
+  <!--<form method="" action="">-->
   <p><span style="font-family:微軟正黑體;text-transform:initial;font-size:200%" class="error">&ensp;&ensp;* 必填欄位</span><p>
   
   <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">基礎資訊</h2>
@@ -17,15 +17,15 @@
  <table>
     <tr>
       <td>&ensp;物種編號 : </br><p>&ensp;id</p>
-      <td><input class=input_type1 type="text" name="id" >(本欄未填寫則自動生成) </td>
+      <td><input  type="hidden" name="id" value="{{ db_id }}" >{{ db_id }} </td>
       <td></td>
       <td></td>
     </tr>
     <tr>
       <td>&ensp;物種名 : </br>&ensp;Organism name</td>
-      <td><input class=input_type1 type="text" name="organism_name" id="organism_name" ><span class="error">* </span></td>
+      <td><input  type="hidden" name="organism_name" id="organism_name" value="{{ organism_name }}">{{ organism_name }}<span class="error">* </span></td>
       <td>&ensp;物種中文名 : </br>&ensp;Chinese name</td>
-      <td><input class=input_type1 type="text" name="chinese_name" id="chinese_name" ></td>
+      <td><input  type="hidden" name="chinese_name" id="chinese_name" value="{{ chinese_name }}">{{ chinese_name }}</td>
     </tr>
   </table>
 
@@ -37,7 +37,7 @@
   <table>
     <tr>
         <td>&ensp;屬名:</br>&ensp;Genus</td>
-        <td><input class=input_type1 type="text" name="genus" id="genus" ><span class="error">* </span>
+        <td><input type="hidden" name="genus" id="genus" value="{{ genus }}" >{{ genus }}<span class="error">* </span>
           <p>ex: <i>Klebsiella, Acinetobacter</i></p>
         </td>
         <td>&ensp;大分類:</br>&ensp;Top type:</td>
@@ -126,22 +126,20 @@
           <input type="checkbox" id="unkown" name="unkown" value="unkown">
           <label for="unkown">Unkown feature</label><br>
           </br><p>others:
-          <textarea class=textarea_typ1 type="text" name="key_word" id="key_word" rows="3" cols="80"></textarea>
+          <textarea type="hidden" name="key_word" id="key_word" rows="3" cols="80"></textarea>
           </p>
         </td>
     </tr>
     <tr>
     <td>&ensp;格蘭氏染色:</br>&ensp;Gram stain:</td>
         <td>
-          <select class=select_type1 name="gram_stain">
-            <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value=""></option>
-            <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value="positive">positive</option>
-            <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value="negative">negative</option>
-          </select>  <span class="error">* </span>
+          <p>{{ gram_stain }}</p>  <span class="error">* </span>
+          <input type="hidden" name="gram_stain" value ="{{ gram_stain }}">
         </td>
     <td>&ensp;樣品來源</br>&ensp;Sample type:</td>
         <td>
           <input type="hidden" name="sample_type">
+
           <input type="checkbox" id="blood" name="blood" value="blood">
           <label for="blood">血液</label>&ensp;&ensp;&ensp;
           <input type="checkbox" id="plasma" name="plasma" value="plasma">
@@ -156,34 +154,34 @@
           <label for="pleural_fluid">胸水</label>&ensp;&ensp;&ensp;
           <input type="checkbox" id="ascites" name="ascites" value="ascites">
           <label for="ascites">腹水</label>&ensp;&ensp;&ensp;
-          <input type="checkbox" id="positive_conpare" name="positive_conpare" value="positive_conpare">
-          <label for="positive_conpare">陽性對照</label>&ensp;&ensp;
-          <input type="checkbox" id="negative_conpare" name="negative_conpare" value="negative_conpare">
-          <label for="negative_conpare">陰性對照</label>&ensp;&ensp;&ensp;&ensp;
+          <input type="checkbox" id="positive_compare" name="positive_compare" value="positive_compare">
+          <label for="positive_compare">陽性對照</label>&ensp;&ensp;
+          <input type="checkbox" id="negative_compare" name="negative_compare" value="negative_compare">
+          <label for="negative_compare">陰性對照</label>&ensp;&ensp;&ensp;&ensp;
           <input type="checkbox" id="tissue" name="tissue" value="tissue">
           <label for="tissue">組織</label>&ensp;&ensp;&ensp;
-          <input type="checkbox" id="others" name="others" value="others">
-          <label for="others">其它</label>&ensp;&ensp;
+          <input type="checkbox" id="sample_type_others" name="sample_type_others" value="others">
+          <label for="sample_type_others">其它</label>&ensp;&ensp;
           <br>
         </td>
     </tr>
     <tr>
         <td>&ensp;Halos id:</td>
-        <td><input class=input_type1 type="text" name="Halos_id" ><p></p></td>
+        <td><input type="hidden" name="Halos_id" value="{{ Halos_id }}"><p>{{ Halos_id }}</p></td>
         <td>&ensp;taxid:</td>
-        <td><input class=input_type1 type="text" name="taxid"></td>
+        <td><input type="hidden" name="taxid" value="{{ taxid }}"><p>{{ taxid }}</p></td>
     </tr>
     <tr>
       <td>&ensp;資訊來源:</br>&ensp;source</td>
       <td><input type="hidden" name="source" value="{{ user.username }}"><p>{{ user.username }}</p></td>
       <td>&ensp;species_taxid:</td>
-      <td><input class=input_type1 type="text" name="species_taxid"></td>
+      <td><input type="hidden" name="species_taxid"  value="{{ species_taxid }}"><p>{{ species_taxid }}</p></td>
     <tr>
   </table>
   <table>
     <tr>
       <td>&ensp;物種描述:</br>&ensp;Description</td>
-      <td><textarea class=textarea_typ1 type="text" name="Description" id="Description" rows="5" cols="130"></textarea><span class="error">* </span></td>
+      <td><textarea type="hidden" name="Description" id="Description" value="{{ Description }}" ><p>{{ Description }}</p></textarea><span class="error">* </span></td>
     </tr>
   </table>
   </br>
@@ -251,11 +249,7 @@
     
 </script>
 <p>
-
-
-
 <input class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:300%" type="submit" value="送出">
-<input class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:300%" type="reset" value="清除">
 </p></br>
 </div>
 {% else %}

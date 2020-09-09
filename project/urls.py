@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include,path
+from django.urls import include, path, re_path
 from mysite import views
 from django.views.generic.base import TemplateView
 from django.conf.urls import url
@@ -32,13 +32,18 @@ urlpatterns = [
     
     ## view db
     path('db', views.reference_summary),
+    path('db/', views.reference_summary),
     
     ## input new data for non-developer
     path('new_input', views.new_input),
+    path('new_input/', views.new_input),
+    path('new_input_check', views.new_input_check),
     
     ## search engine non-developer
     path('search_engine', TemplateView.as_view(template_name='./content/search_engine.html')),
+    path('search_engine/', TemplateView.as_view(template_name='./content/search_engine.html')),
     path('search_result', views.search_result),
+    #re_path(r'new_input', comment),
     
     # manage 
     path('manage',TemplateView.as_view(template_name='./content/manage.html')),
@@ -46,9 +51,6 @@ urlpatterns = [
     ## login interface
     path('accounts/', include('django.contrib.auth.urls')),
 
-
-    path('restaurants_list', views.list_restaurants),
-    path('restaurants_list/', views.list_restaurants),
     ### OAuth2 setting
     #path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
     ### using re_path
