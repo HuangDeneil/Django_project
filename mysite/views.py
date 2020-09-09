@@ -25,6 +25,7 @@ def new_input_check(request):
     db_id = request.POST['id']
     orgranism_name = request.POST['orgranism_name']
     chinese_name = request.POST['chinese_name']
+    '''
     genus = request.POST['genus']
     top_type = request.POST['top_type']
     species_name = request.POST['species_name']
@@ -76,6 +77,7 @@ def new_input_check(request):
     reference5 = request.POST['reference5']
     data_source = request.POST['data_source']
     data_status = request.POST['data_status']
+    '''
     date = timezone.localtime(timezone.now()) # 擷取現在時間
     #reference_summary.objects.create(db_id=db_id, orgranism_name=orgranism_name, chinese_name=chinese_name, genus=genus, gram_stain=gram_stain, top_type=top_type, source=source, key_word=key_word, Halos_id=Halos_id, taxid=taxid,Description=source,reference1=reference1, reference2=reference2, reference3=reference3, reference4=reference4, reference5=reference5,date=date,data_source=data_source,data_status=data_status )
     return render(request, './content/new_input_data_check.html', locals())

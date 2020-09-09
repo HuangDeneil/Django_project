@@ -76,7 +76,7 @@ class reference_summary(models.Model):
 
     def __str__(self):
         return self.orgranism_name
-
+'''
 class Comment(models.Model):
     content = models.CharField(max_length=200)
     visitor = models.CharField(max_length=20)
@@ -89,3 +89,4 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=20)
     phone_number = models.CharField(max_length=15)
     address = models.CharField(max_length=50, blank=True)
+'''
