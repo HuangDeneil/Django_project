@@ -76,7 +76,18 @@ class reference_summary(models.Model):
 
     def __str__(self):
         return self.orgranism_name
-'''
+
+
+
+class db_search_log(models.Model):
+    input_word = models.CharField(max_length=200)
+    category = models.CharField(max_length=20)
+    user = models.CharField(max_length=20)
+    date_time = models.DateTimeField(null=True, blank=True, auto_now=True)
+
+
+
+"""
 class Comment(models.Model):
     content = models.CharField(max_length=200)
     visitor = models.CharField(max_length=20)
@@ -89,4 +100,11 @@ class Restaurant(models.Model):
     name = models.CharField(max_length=20)
     phone_number = models.CharField(max_length=15)
     address = models.CharField(max_length=50, blank=True)
-'''
+
+
+"""
+
+
+
+
+

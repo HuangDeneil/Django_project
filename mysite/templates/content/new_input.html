@@ -1,6 +1,6 @@
     {% extends "base.html" %}
     {% block title %} 輸入 order input{% endblock %}
-    {% block bottum %} <a href=".." class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:120%">Home</a>{% endblock %}
+    {% block bottum %} <a href="../homepage" class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:120%">Back</a> {% endblock %}
     {% block header %} 新增資料{% endblock %}
     {% block content %}
 
@@ -8,7 +8,7 @@
 
 <!-- Table region  -->
 <div id="wrapper" class="container">
-  <form action="new_input_check" method="POST" >{% csrf_token %}
+  <form method="POST" action="">{% csrf_token %}
   <p><span style="font-family:微軟正黑體;text-transform:initial;font-size:200%" class="error">&ensp;&ensp;* 必填欄位</span><p>
   
   <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">基礎資訊</h2>
@@ -141,6 +141,7 @@
     <td>&ensp;樣品來源</br>&ensp;Sample type:</td>
         <td>
           <input type="hidden" name="sample_type">
+
           <input type="checkbox" id="blood" name="blood" value="blood">
           <label for="blood">血液</label>&ensp;&ensp;&ensp;
           <input type="checkbox" id="plasma" name="plasma" value="plasma">

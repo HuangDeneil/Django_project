@@ -24,6 +24,12 @@ class gene_infoAdmin(admin.ModelAdmin):
 class reference_summaryAdmin(admin.ModelAdmin):
     list_display=('db_id', 'orgranism_name','top_type', 'key_word', 'Description','taxid')    #  要顯示的欄位
     search_fields=('db_id', 'orgranism_name', 'taxid') 
+
+
+class db_search_logAdmin(admin.ModelAdmin):
+    list_display=('user','input_word','category','date_time') 
+    search_fields=('user','input_word','category','date_time') 
+
 '''
 class CommentAdmin(admin.ModelAdmin):
     list_display=('content', 'visitor','email', 'date_time')    #  要顯示的欄位
@@ -39,6 +45,8 @@ admin.site.register(models.scientific, scientificAdmin)
 admin.site.register(models.data_type, data_typeAdmin)
 admin.site.register(models.gene_info, gene_infoAdmin)
 admin.site.register(models.reference_summary, reference_summaryAdmin)
+admin.site.register(models.db_search_log, db_search_logAdmin)
+
 #admin.site.register(models.Comment, CommentAdmin)
 #admin.site.register(models.Restaurant, RestaurantAdmin)
 

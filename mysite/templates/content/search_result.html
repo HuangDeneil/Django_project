@@ -7,16 +7,16 @@
     <a href="search_engine" class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:120%">Search engine</a> 
     {% endblock %}
     
-    {% block header %} The header {% endblock %}
+    {% block header %} Search result {% endblock %}
     {% block content %}
 
 {% if user.is_authenticated %}
 <div id="wrapper" class="container">
     <form name="table_value" method="GET" action="search_engine"> {% csrf_token %}
-        <table>
+	<table>
             <tr bgcolor='#fdfbfc'>
-                <td style="font-family:微軟正黑體;text-transform:initial;font-size:170%">category</td>
-                <td style="font-family:微軟正黑體;text-transform:initial;font-size:170%">input_text</td>
+                <td style="font-family:微軟正黑體;text-transform:initial;font-size:170%">搜尋分類</td>
+                <td style="font-family:微軟正黑體;text-transform:initial;font-size:170%">Input</td>
                 <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%">查詢時間</td>
             </tr>
             <tr bgcolor='{% cycle "#dadee8" "#fdfbfc" %}'>
@@ -25,6 +25,50 @@
                 <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%">{{ now  }}</td>
             </tr>
         </table>
+    <br><br>
+    <h1> Database result : </h1>
+    <br>
+{% for i in entry_list %}
+         <svg height="7" width="1200"><line x1="0" y1="0" x2="1300" y2="0" style="stroke:rgb(100,200,200);stroke-width:20" /></svg>
+         <table>
+            <tr>
+            </tr>
+                <tr>
+                    <td>ID: {{ i.db_id }}</td>
+                    <td>organism_name: <i>{{ i.orgranism_name }}</i></td>
+                    <td>chinese_name: {{ i.chinese_name }}</td>
+                </tr>
+                <tr>
+                    <td>genus: <i>{{ i.genus }}</i></td>
+                    <td>type: {{ i.top_type }}</td>
+                    <td></td>
+                </tr>
+        </table>
+                           
+        <table>
+            <tr></tr>
+            <tr>
+                <td>source: {{ i.source }}</td>
+                <td>Halos_id: {{ i.Halos_id }}</td>
+                <td>taxid: {{ i.taxid }}</td>
+            </tr>
+        </table>
+                    
+        <table>
+            <tr><td>key_word: </td><td>{{ i.key_word }}</td></tr>
+            <tr><td>Description: </td><td>{{ i.Description }}</td></tr>
+            <tr><td>reference: </td><td>{{ i.reference1 }}</td></tr>
+            <tr><td>reference: </td><td>{{ i.reference2 }}</td></tr>
+            <tr><td>reference: </td><td>{{ i.reference3 }}</td></tr>
+            <tr><td>reference: </td><td>{{ i.reference4 }}</td></tr>
+            <tr><td>reference: </td><td>{{ i.reference5 }}</td></tr>
+        </table>
+            <br><br><br>
+    <!-- </form> -->
+{% endfor %}
+    
+    
+    
     </form>
 </div>
 
