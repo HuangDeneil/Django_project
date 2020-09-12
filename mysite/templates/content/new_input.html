@@ -8,7 +8,7 @@
 
 <!-- Table region  -->
 <div id="wrapper" class="container">
-  <form method="POST" action="">{% csrf_token %}
+  <form method="POST" action="input_check">{% csrf_token %}
   <p><span style="font-family:微軟正黑體;text-transform:initial;font-size:200%" class="error">&ensp;&ensp;* 必填欄位</span><p>
   
   <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">基礎資訊</h2>
@@ -16,7 +16,7 @@
  <table>
     <tr>
       <td>&ensp;物種編號 : </br><p>&ensp;id</p>
-      <td><input class=input_type1 type="text" name="id" >(本欄未填寫則自動生成) </td>
+      <td><input class=input_type1 type="text" name="db_id" >(本欄未填寫則自動生成) </td>
       <td></td>
       <td></td>
     </tr>
@@ -41,7 +41,7 @@
         </td>
         <td>&ensp;大分類:</br>&ensp;Top type:</td>
         <td>
-          <select class=select_type1 name="type">
+          <select class=select_type1 name="top_type">
             <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value=""></option>
             <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value="bacteria">bacteria</option>
             <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value="archaea">archaea</option>
@@ -125,7 +125,7 @@
           <input type="checkbox" id="unkown" name="unkown" value="unkown">
           <label for="unkown">Unkown feature</label><br>
           </br><p>others:
-          <textarea class=textarea_typ1 type="text" name="key_word" id="key_word" rows="3" cols="80"></textarea>
+          <textarea class=textarea_typ1 type="text" name="keyword_others" id="keyword_others" rows="3" cols="80"></textarea>
           </p>
         </td>
     </tr>
@@ -139,9 +139,7 @@
           </select>  <span class="error">* </span>
         </td>
     <td>&ensp;樣品來源</br>&ensp;Sample type:</td>
-        <td>
-          <input type="hidden" name="sample_type">
-
+        <td> 
           <input type="checkbox" id="blood" name="blood" value="blood">
           <label for="blood">血液</label>&ensp;&ensp;&ensp;
           <input type="checkbox" id="plasma" name="plasma" value="plasma">
@@ -162,8 +160,8 @@
           <label for="negative_conpare">陰性對照</label>&ensp;&ensp;&ensp;&ensp;
           <input type="checkbox" id="tissue" name="tissue" value="tissue">
           <label for="tissue">組織</label>&ensp;&ensp;&ensp;
-          <input type="checkbox" id="others" name="others" value="others">
-          <label for="others">其它</label>&ensp;&ensp;
+          <input type="checkbox" id="sample_type_others" name="sample_type_others" value="others">
+          <label for="sample_type_others">其它</label>&ensp;&ensp;
           <br>
         </td>
     </tr>

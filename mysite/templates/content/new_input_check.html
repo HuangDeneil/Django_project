@@ -1,0 +1,199 @@
+    {% extends "base.html" %}
+    {% block title %} 輸入 order input{% endblock %}
+    {% block bottum %} <a href="../homepage" class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:120%">Back</a> {% endblock %}
+    {% block header %} 新增資料{% endblock %}
+    {% block content %}
+
+{% if user.is_authenticated %}
+
+<!-- Table region  -->
+<div id="wrapper" class="container">
+  <form method="POST" action="">{% csrf_token %}
+  <p><span style="font-family:微軟正黑體;text-transform:initial;font-size:200%" class="error">&ensp;&ensp;* 必填欄位</span><p>
+  
+  <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">基礎資訊</h2>
+  <svg height="7" width="1200"><line x1="0" y1="0" x2="1300" y2="0" style="stroke:rgb(0,150,255);stroke-width:2" /></svg>
+ <table>
+    <tr>
+      <td>&ensp;物種編號 : </br><p>&ensp;id</p>
+      <td><input type="hidden" name="db_id" value="{{ db_id }}" >{{ db_id }} </td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>&ensp;物種名 : </br>&ensp;Organism name</td>
+      <td><input type="hidden" name="organism_name" id="organism_name" value="{{ organism_name }}" >{{ organism_name }}<span class="error">* </span></td>
+      <td>&ensp;物種中文名 : </br>&ensp;Chinese name</td>
+      <td><input type="hidden" name="chinese_name" id="chinese_name" value="{{chinese_name}}" >{{chinese_name}}</td>
+    </tr>
+  </table>
+
+    </br></br>
+
+  <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">分類資訊</h2>
+  <svg height="7" width="1200"><line x1="0" y1="0" x2="1300" y2="0" style="stroke:rgb(0,150,255);stroke-width:2" /></svg>
+
+  <table>
+    <tr>
+        <td>&ensp;屬名:</br>&ensp;Genus</td>
+        <td><input type="hidden" name="genus" id="genus" value="{{genus}}"><i>{{genus}}</i><span class="error">* </span></td>
+        <td>&ensp;大分類:</br>&ensp;Top type:</td>
+        <td>
+          <input type="hidden" name="top_type" id="top_type" value="{{top_type}}" >{{top_type}}<span class="error">* </span>
+        </td>
+    </tr>
+    <tr>
+        <td>&ensp;種名:</br>&ensp;Species</td>
+        <td><input type="hidden" name="species_name" id="species_name" value="{{species_name}}" ><i>{{species_name}}</i><span class="error">* </span></td>
+        <td>&ensp;關鍵字:</br>&ensp;key word</td>
+        <td>
+          <br>
+          <h3>Aerobic/anaerobic:</h3>
+          {{Aerobic_ablity}}
+          <br><br>
+          <h3>Pathogenic:</h3>
+          {{keyword_pathogen}}
+          <br><br>
+          <h3>Flora/environmental:</h3>
+          {{keyword_Flora}}
+          <br><br>
+          <h3>Position:</h3>
+          {{keyword_Position}}
+          <br><br>
+          <h3>Extrime type:</h3>
+          {{keyword_Extrime}}
+          <br><br>
+          <h3>Others:</h3>
+          {{keyword_others_list}}
+          
+        </td>
+    </tr>
+    <tr>
+    <td>&ensp;格蘭氏染色:</br>&ensp;Gram stain:</td>
+        <td>
+          <input type="hidden" name="gram_stain" value={{gram_stain}}>{{gram_stain}}
+          <span class="error">* </span>
+        </td>
+    <td>&ensp;樣品來源</br>&ensp;Sample type:</td>
+        <td>
+          <input type="hidden" name="sample_type">
+
+          <input type="checkbox" id="blood" name="blood" value="blood">
+          <label for="blood">血液</label>&ensp;&ensp;&ensp;
+          <input type="checkbox" id="plasma" name="plasma" value="plasma">
+          <label for="plasma">血漿</label>&ensp;&ensp;&ensp;
+          <input type="checkbox" id="CSF" name="CSF" value="CSF">
+          <label for="CSF">腦脊髓液</label>&ensp;&ensp;
+          <input type="checkbox" id="BLAF" name="BLAF" value="BLAF">
+          <label for="BLAF">肺泡灌洗液</label>&ensp;&ensp;
+          <input type="checkbox" id="sputum" name="sputum" value="sputum">
+          <label for="sputum">痰液</label>&ensp;<br>
+          <input type="checkbox" id="pleural_fluid" name="pleural_fluid" value="pleural_fluid">
+          <label for="pleural_fluid">胸水</label>&ensp;&ensp;&ensp;
+          <input type="checkbox" id="ascites" name="ascites" value="ascites">
+          <label for="ascites">腹水</label>&ensp;&ensp;&ensp;
+          <input type="checkbox" id="positive_conpare" name="positive_conpare" value="positive_conpare">
+          <label for="positive_conpare">陽性對照</label>&ensp;&ensp;
+          <input type="checkbox" id="negative_conpare" name="negative_conpare" value="negative_conpare">
+          <label for="negative_conpare">陰性對照</label>&ensp;&ensp;&ensp;&ensp;
+          <input type="checkbox" id="tissue" name="tissue" value="tissue">
+          <label for="tissue">組織</label>&ensp;&ensp;&ensp;
+          <input type="checkbox" id="others" name="others" value="others">
+          <label for="others">其它</label>&ensp;&ensp;
+          <br>
+        </td>
+    </tr>
+    <tr>
+        <td>&ensp;Halos id:</td>
+        <td><input type="hidden" name="Halos_id" ><p></p></td>
+        <td>&ensp;taxid:</td>
+        <td><input type="hidden" name="taxid"></td>
+    </tr>
+    <tr>
+      <td>&ensp;資訊來源:</br>&ensp;source</td>
+      <td><input type="hidden" name="source" value="{{ user.username }}"><p>{{ user.username }}</p></td>
+      <td>&ensp;species_taxid:</td>
+      <td><input type="hidden" name="species_taxid"></td>
+    <tr>
+  </table>
+  <table>
+    <tr>
+      <td>&ensp;物種描述:</br>&ensp;Description</td>
+      <td><textarea class=textarea_typ1 type="text" name="Description" id="Description" rows="5" cols="130"></textarea><span class="error">* </span></td>
+    </tr>
+  </table>
+  </br>
+      
+  <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">文獻(reference):</h2>
+  <svg height="7" width="1200"><line x1="0" y1="0" x2="1300" y2="0" style="stroke:rgb(0,150,255);stroke-width:2" /></svg>
+  <table>
+    <tr>
+      <td>文獻1</br>reference1:</td>
+      <td><textarea type="hidden" name="reference1" id="reference1" rows="2" cols="130" id="order_form"></textarea><span class="error">* </span></td>
+    </tr>
+    <tr>
+      <td>文獻2</br>reference2:</td>
+      <td><textarea type="hidden" name="reference2" rows="2" cols="130"></textarea></td>
+    </tr>
+    <tr>
+      <td>文獻3</br>reference3:</td>
+      <td><textarea type="hidden" name="reference3" rows="2" cols="130"></textarea></td>
+    </tr>
+    <tr>
+      <td>文獻4</br>reference4:</td>
+      <td><textarea type="hidden" name="reference4" rows="2" cols="130"></textarea></td>
+    </tr>
+    <tr>
+      <td>文獻5</br>reference5:</td>
+      <td><textarea type="hidden" name="reference5" rows="2" cols="130"></textarea></td>
+    </tr>
+  </table>
+  </br>
+  </br>
+
+  <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">來源資訊:</h2>
+  <svg height="7" width="1200"><line x1="0" y1="0" x2="1300" y2="0" style="stroke:rgb(0,150,255);stroke-width:2" /></svg>
+  <table>
+    <tr>
+      <td>資料來源</br>data source</td>
+      <td><input type="hidden" name="data_source" id="data_source"></td>
+    </tr>
+    <tr>
+      <td>資料基因狀況</br>data status</td>
+      <td><input type="hidden" name="data_status" id="data_status"></td>
+    </tr>
+  </table>
+<script>
+    var order_form = $("#name").value;
+    var source_name = document.getElementById("genus").value;
+    var source_phone = document.getElementById("type").value;
+    var arrive_name = document.getElementById("key_word").value;
+    var arrive_phone = document.getElementById("Description").value;
+    var arrive_address = document.getElementById("reference1").value;
+
+    if( document.getElementById("name").value === "" ){ document.write("") }
+    else if( source_name === "" ){ }
+    else if( source_phone === "" ){ }
+    else if( arrive_name === "" ){ }
+    else if( arrive_phone === "" ){ }
+    else if( arrive_address === "" ){  }
+    else{
+      document.write("test");alert("test");
+      }
+    
+</script>
+<p>
+
+
+
+<input class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:300%" type="submit" value="送出">
+<input class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:300%" type="reset" value="清除">
+</p></br>
+</div>
+{% else %}
+    {% include "login_direction.html" %}
+{% endif %}
+{% endblock %}
+</html>
+
+
