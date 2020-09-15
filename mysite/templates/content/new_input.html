@@ -1,6 +1,6 @@
     {% extends "base.html" %}
-    {% block title %} 輸入 order input{% endblock %}
-    {% block bottum %} <a href="../homepage" class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:120%">Back</a> {% endblock %}
+    {% block title %} New input{% endblock %}
+    {% block bottum %} <a href="../homepage" class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:120%">Home</a> {% endblock %}
     {% block header %} 新增資料{% endblock %}
     {% block content %}
 
@@ -9,10 +9,19 @@
 <!-- Table region  -->
 <div id="wrapper" class="container">
   <form method="POST" action="input_check">{% csrf_token %}
-  <p><span style="font-family:微軟正黑體;text-transform:initial;font-size:200%" class="error">&ensp;&ensp;* 必填欄位</span><p>
-  
-  <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">基礎資訊</h2>
-  <svg height="7" width="1200"><line x1="0" y1="0" x2="1300" y2="0" style="stroke:rgb(0,150,255);stroke-width:2" /></svg>
+  <p><span style="font-family:微軟正黑體;text-transform:initial;font-size:120%" class="error">&ensp;&ensp;* 必填欄位</span><p>
+    {% if message == "error_blank" %}
+      <script>
+          alert('請填寫 "*" 欄位');
+      </script>
+    {% endif %}
+    {% if message == "Upload_successfully" %}
+        <table>
+            <tr><td>{{db_id}} {{organism_name}} <p>Upload successfully !!</p> </td></tr>
+        </table>
+    {% endif %}
+  <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:150%">基礎資訊</h2>
+  <svg height="7" width="1200"><line x1="0" y1="0" x2="1300" y2="0" style="stroke:rgb(0,150,255);stroke-width:2" ></svg>
  <table>
     <tr>
       <td>&ensp;物種編號 : </br><p>&ensp;id</p>
@@ -27,13 +36,10 @@
       <td><input class=input_type1 type="text" name="chinese_name" id="chinese_name" ></td>
     </tr>
   </table>
-
     </br></br>
-
-  <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">分類資訊</h2>
+  <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:150%">分類資訊</h2>
   <svg height="7" width="1200"><line x1="0" y1="0" x2="1300" y2="0" style="stroke:rgb(0,150,255);stroke-width:2" /></svg>
-
-  <table>
+    <table>
     <tr>
         <td>&ensp;屬名:</br>&ensp;Genus</td>
         <td><input class=input_type1 type="text" name="genus" id="genus" ><span class="error">* </span>
@@ -62,13 +68,13 @@
         <td>
           <br>
           <h3>Aerobic/anaerobic:</h3>
-          <input type="radio" id="Strictly aerobic" name="Aerobic_ablity" value="Strictly aerobic">
+          <input type="radio" id="Strictly aerobic" name="Aerobic_ablity" value="Strictly_aerobic">
           <label for="Strictly aerobic">Strictly aerobic</label>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
           <input type="radio" id="Aerobic" name="Aerobic_ablity" value="Aerobic">
           <label for="Aerobic">Aerobic</label>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
           <input type="radio" id="Obligate_aerobe" name="Aerobic_ablity" value="Obligate_aerobe">
           <label for="Obligate_aerobe">Obligate_aerobe</label></br>
-          <input type="radio" id="Facultative anaerobic" name="Aerobic_ablity" value="Facultative anaerobic">
+          <input type="radio" id="Facultative anaerobic" name="Aerobic_ablity" value="Facultative_anaerobic">
           <label for="Facultative anaerobic">Facultative anaerobic</label>&ensp;&ensp;&ensp;&ensp;
           <input type="radio" id="Microaerophiles" name="Aerobic_ablity" value="Microaerophiles">
           <label for="Microaerophiles">Microaerophiles</label>&ensp;&ensp;&ensp;&ensp;
@@ -136,7 +142,7 @@
             <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value=""></option>
             <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value="positive">positive</option>
             <option style="font-family:微軟正黑體;text-transform:initial;font-size:120%" value="negative">negative</option>
-          </select>  <span class="error">* </span>
+          </select>
         </td>
     <td>&ensp;樣品來源</br>&ensp;Sample type:</td>
         <td> 
@@ -160,8 +166,6 @@
           <label for="negative_conpare">陰性對照</label>&ensp;&ensp;&ensp;&ensp;
           <input type="checkbox" id="tissue" name="tissue" value="tissue">
           <label for="tissue">組織</label>&ensp;&ensp;&ensp;
-          <input type="checkbox" id="sample_type_others" name="sample_type_others" value="others">
-          <label for="sample_type_others">其它</label>&ensp;&ensp;
           <br>
         </td>
     </tr>
@@ -186,7 +190,7 @@
   </table>
   </br>
       
-  <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">文獻(reference):</h2>
+  <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:150%">文獻(reference):</h2>
   <svg height="7" width="1200"><line x1="0" y1="0" x2="1300" y2="0" style="stroke:rgb(0,150,255);stroke-width:2" /></svg>
   <table>
     <tr>
@@ -213,7 +217,7 @@
   </br>
   </br>
 
-  <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:200%">來源資訊:</h2>
+  <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:150%">來源資訊:</h2>
   <svg height="7" width="1200"><line x1="0" y1="0" x2="1300" y2="0" style="stroke:rgb(0,150,255);stroke-width:2" /></svg>
   <table>
     <tr>
@@ -229,31 +233,13 @@
       </td>
     </tr>
   </table>
-<script>
-    var order_form = $("#name").value;
-    var source_name = document.getElementById("genus").value;
-    var source_phone = document.getElementById("type").value;
-    var arrive_name = document.getElementById("key_word").value;
-    var arrive_phone = document.getElementById("Description").value;
-    var arrive_address = document.getElementById("reference1").value;
 
-    if( document.getElementById("name").value === "" ){ document.write("") }
-    else if( source_name === "" ){ }
-    else if( source_phone === "" ){ }
-    else if( arrive_name === "" ){ }
-    else if( arrive_phone === "" ){ }
-    else if( arrive_address === "" ){  }
-    else{
-      document.write("test");alert("test");
-      }
-    
-</script>
+</div>
+<div id="wrapper" class="container" align="center" >
 <p>
-
-
-
 <input class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:300%" type="submit" value="送出">
 <input class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:300%" type="reset" value="清除">
+</form>
 </p></br>
 </div>
 {% else %}

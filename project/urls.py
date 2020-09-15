@@ -34,10 +34,14 @@ urlpatterns = [
     path('db', views.reference_summary),
     
     ## input new data for non-developer
-    path('new_input',TemplateView.as_view(template_name='./content/new_input.html')),
-    path('new_input/',TemplateView.as_view(template_name='./content/new_input.html')),
-    path('new_input/input_check',views.new_input),
-    path('input_check/',views.new_input),
+    path('new_input',views.new_input),
+    path('new_input/',views.new_input),
+    path('new_input/input_check',views.new_input_check),
+    path('input_check/',views.new_input_check),
+    path('input_check',views.new_input_check),
+    path('input_upload',views.input_upload),
+
+    
     
     ## search engine non-developer
     path('search_engine', TemplateView.as_view(template_name='./content/search_engine.html')),

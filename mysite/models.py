@@ -50,7 +50,7 @@ class gene_info(models.Model):
 
 class reference_summary(models.Model): 
     db_id = models.CharField(max_length=30, blank=True, null=True)
-    orgranism_name = models.CharField(max_length=100, blank=True, null=True, default='')  # 當參照物件(ForeignKey)被刪除，此參照物件也會被刪除喔~  
+    orgranism_name = models.CharField(max_length=100, blank=True, null=True, default='') 
     chinese_name = models.CharField(max_length=100, null=True, blank=True, default='')  
     genus = models.CharField(max_length=100, null=True, blank=True, default='')  
     species_name = models.CharField(max_length=100, blank=True, null=True, default='')  
@@ -58,8 +58,10 @@ class reference_summary(models.Model):
     top_type = models.CharField(max_length=100, blank=True,null=True, default='') 
     source = models.CharField(max_length=200, blank=True,null=True, default='')  ## input user name
     key_word = models.TextField(blank=True, null=True, default='')  
+    #sample_type = models.TextField(blank=True, null=True, default='')  
     Halos_id = models.CharField(max_length=100, null=True, blank=True, default='')  
     taxid = models.CharField(max_length=100, blank=True, null=True, default='')  
+    #species_taxid = models.CharField(max_length=100, blank=True, null=True, default='')  
     Description = models.TextField(null=True, blank=True, default='')  
     reference1 = models.TextField(null=True, blank=True)  
     reference2 = models.TextField(null=True, blank=True)  
@@ -69,7 +71,6 @@ class reference_summary(models.Model):
     date = models.DateField(null=True, blank=True, auto_now=True)
     data_source = models.CharField(max_length=200,null=True, default='unknow', blank=True)  
     data_status = models.CharField(max_length=200,null=True, default='unknow', blank=True)  
-
     class Meta:
       #  ordering = ('pub_date',)   #  正排序
         ordering = ('-date',) #  反排序

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, request
 from mysite import models
 from datetime import datetime
 from django.contrib import auth
@@ -18,230 +18,177 @@ def reference_summary(request):
     now = datetime.now()
     return render(request, './content/call_db.html', locals())
 
-## check POST value is not Null 
-def post_fuction(value):
-    #print(value)
-    
-    try:
-        data = request.POST['source']
-    except :
-        data = "unknown"
-        
-    return data
-    #return str('request.POST[\''+value+'\']')
+def new_input(request):
+    space_count=list(range(1,50))
+    return render(request, './content/new_input.html', locals())
 
 
 ## input new data 
-def new_input(request):
-    now = datetime.now()
+def new_input_check(request):
+    def post_fuction(value):
+        try:
+            data = request.POST[value]
+        except :
+            data = ""
+        return data
     
-    db_id= request.POST['db_id']
-    try:
-        db_id = request.POST['db_id']
-    except KeyError:
-        db_id = ""
-    if db_id == "":
-        dbid = now | "Y M d h:i:s"
-    
-    organism_name = request.POST['organism_name']
-    chinese_name = request.POST['chinese_name']
-    genus = request.POST['genus']
-    top_type = request.POST['top_type']
-    species_name = request.POST['species_name']
-    
-    ###### Key_words
-    # Aerobic_ablity
-    try:
-        aerobic_ablity = request.POST['Aerobic_ablity']
-    except KeyError:
-        aerobic_ablity = "unknown_aerobic_ablity"
-    
-    ###### Pathogenic:
-    # pathogen
-    try:
-        pathogen = request.POST['pathogen']
-    except KeyError:
-        pathogen = ""
-    # opportunistic_pathogen
-    try:
-        opportunistic_pathogen = request.POST['opportunistic_pathogen']
-    except KeyError:
-        opportunistic_pathogen = ""
-    # plant_pathogen
-    try:
-        plant_pathogen = request.POST['plant_pathogen']
-    except KeyError:
-        plant_pathogen = ""
-    # unkown_pathogenic
-    try:
-        unkown_pathogenic = request.POST['unkown_pathogenic']
-    except KeyError:
-        unkown_pathogenic = ""
-    keyword_pathogen=[ pathogen, opportunistic_pathogen, plant_pathogen, unkown_pathogenic]
-    
-    ### Flora/environmental:
-    # normal_flora
-    try:
-        normal_flora = request.POST['normal_flora']
-    except KeyError:
-        normal_flora = ""
-    # environmental
-    try:
-        environmental = request.POST['environmental']
-    except KeyError:
-        environmental = ""
-    keyword_Flora= [normal_flora,environmental]
-    
-    ### Position:
-    # oral
-    try:
-        oral = request.POST['oral']
-    except KeyError:
-        oral = ""
-    # gut
-    try:
-        gut = request.POST['gut']
-    except KeyError:
-        gut = ""
-    # skin
-    try:
-        skin = request.POST['skin']
-    except KeyError:
-        skin = ""
-    # vaginal
-    try:
-        vaginal = request.POST['vaginal']
-    except KeyError:
-        vaginal = ""
-    # respiratory
-    try:
-        respiratory = request.POST['respiratory']
-    except KeyError:
-        respiratory = ""
-    keyword_Position=[oral,gut,skin,vaginal,respiratory]
-    
-    ### Extrime type:
-    # extrime
-    try:
-        extrime = request.POST['extrime']
-    except KeyError:
-        extrime = ""
-    # acidophilic
-    try:
-        acidophilic = request.POST['acidophilic']
-    except KeyError:
-        acidophilic = ""
-    # thermophilic
-    try:
-        thermophilic = request.POST['thermophilic']
-    except KeyError:
-        thermophilic = ""
-    # halophilic
-    try:
-        halophilic = request.POST['halophilic']
-    except KeyError:
-        halophilic = ""
-    keyword_Extrime = [extrime,acidophilic,thermophilic,halophilic]
-    ### others :
-    # unkown
-    try:
-        unkown = request.POST['unkown']
-    except KeyError:
-        unkown = ""
-    
-    # keyword_others
-    try:
-        keyword_others = request.POST['keyword_others']
-    except KeyError:
-        keyword_others = ""
-    keyword_others_list=[unkown,keyword_others]
-    
-    #gram_stain
-    try:
-        gram_stain = request.POST['gram_stain']
-    except KeyError:
-        gram_stain = ""
-    
-    # sample_type
-    #blood
-    # plasma
-    # CSF
-    # BLAF
-    # sputum
-    # pleural_fluid
-    # ascites
-    # positive_conpare
-    # negative_conpare
-    # tissue
-    # sample_type_others
+    def post_fuction_alarm(value):
+        try:
+            data = request.POST[value]
+        except :
+            data = ""
+        
+        if data == "":
+            return render(request, './content/new_input.html', locals())
+        else:
+            return data
     
     
-    # Halos_id
-    try:
-        Halos_id = request.POST['Halos_id']
-    except KeyError:
-        Halos_id = ""
-    # taxid
-    try:
-        taxid = request.POST['taxid']
-    except KeyError:
-        taxid = ""
-    #species_taxid
-    try:
-        species_taxid = request.POST['species_taxid']
-    except KeyError:
-        species_taxid = ""
+    if request.method == 'POST':
+        now = datetime.now()
+        s="S"
+        db_id = post_fuction('db_id')
+        organism_name =post_fuction('organism_name')
+        chinese_name = post_fuction('chinese_name')
+        genus = post_fuction('genus')
+        top_type = post_fuction('top_type')
+        species_name = post_fuction('species_name')
+        
+        ###### Key_words
+        # Aerobic_ablity
+        aerobic_ablity = post_fuction('Aerobic_ablity')
+        ###### Pathogenic:
+        pathogen = post_fuction('pathogen')
+        opportunistic_pathogen = post_fuction('opportunistic_pathogen')
+        plant_pathogen = post_fuction('plant_pathogen')
+        unkown_pathogenic = post_fuction('unkown_pathogenic')
+        keyword_pathogen=[ pathogen, opportunistic_pathogen, plant_pathogen, unkown_pathogenic]
+        ### Flora/environmental:
+        normal_flora = post_fuction('normal_flora')
+        environmental = post_fuction('environmental')
+        keyword_Flora= [normal_flora,environmental]
+        ### Position:
+        oral = post_fuction('oral')
+        gut = post_fuction('gut')
+        skin = post_fuction('skin')
+        vaginal = post_fuction('vaginal')
+        respiratory = post_fuction('respiratory')
+        keyword_Position=[oral,gut,skin,vaginal,respiratory]
+        ### Extrime type:
+        extrime = post_fuction('extrime')
+        acidophilic = post_fuction('acidophilic')
+        thermophilic = post_fuction('thermophilic')
+        halophilic = post_fuction('halophilic')
+        keyword_Extrime = [extrime,acidophilic,thermophilic,halophilic]
+        ### others :
+        unkown = post_fuction('unkown')
+        keyword_others = post_fuction('keyword_others')
+        keyword_others_list=[unkown,keyword_others]
+        #keyword=[aerobic_ablity,keyword_pathogen,keyword_Flora,keyword_Position,keyword_Extrime,keyword_others_list]
+        keyword=[aerobic_ablity,pathogen,opportunistic_pathogen,plant_pathogen,unkown_pathogenic,normal_flora,environmental,oral,gut,skin,vaginal,respiratory,extrime,acidophilic,thermophilic,halophilic,unkown,keyword_others]
+        #test=str(type(keyword))
+        gram_stain = post_fuction('gram_stain')
+        
+        # sample_type
+        blood = post_fuction('blood')
+        plasma = post_fuction('plasma')
+        CSF = post_fuction('CSF')
+        BLAF = post_fuction('BLAF')
+        sputum = post_fuction('sputum')
+        pleural_fluid = post_fuction('pleural_fluid')
+        ascites = post_fuction('ascites')
+        positive_conpare = post_fuction('positive_conpare')
+        negative_conpare = post_fuction('negative_conpare')
+        tissue = post_fuction('tissue')
+        sample_type=[blood,plasma,CSF,BLAF,sputum,pleural_fluid,ascites,positive_conpare,negative_conpare,tissue]
+
+        Halos_id = post_fuction('Halos_id')
+        taxid = post_fuction('taxid')
+        species_taxid = post_fuction('species_taxid')
+        the_user = post_fuction('source')
+        Description = post_fuction('Description')
+        reference1 = post_fuction('reference1')
+        reference2 = post_fuction('reference2')
+        reference3 = post_fuction('reference3')
+        reference4 = post_fuction('reference4')
+        reference5 = post_fuction('reference5')
+        reference=[reference1,reference2,reference3,reference4,reference5]
+        
+        data_source = post_fuction('data_source')
+        data_status = post_fuction('data_status')
+        
+        if organism_name == "" or genus == "" or top_type == "" or species_name == "" or Description == "" or reference1 == "" :
+            message="error_blank"
+            return render(request, './content/new_input.html', locals())
+        message="Upload successfully"
+        return render(request, './content/new_input_check.html', locals())
+    else:
+        return render(request, './content/new_input.html', locals())
+
+def input_upload(request):
+    def post_fuction(value):
+        try:
+            data = request.POST[value]
+        except :
+            data = ""
+        return data
+    if request.method == 'POST':
+        
+        # db_id,organism_name,chinese_name,genus,top_type,species_name,
+        # keyword,gram_stain,sample_type,source,Description,Halos_id,
+        # reference,data_source, data_status
+        
+        db_id=post_fuction('db_id')
+        organism_name=post_fuction('organism_name')
+        chinese_name = post_fuction('chinese_name')
+        genus = post_fuction('genus')
+        top_type = post_fuction('top_type')
+        species_name = post_fuction('species_name')
+        keyword = post_fuction('keyword')
+        gram_stain = post_fuction('gram_stain')
+        sample_type = post_fuction('sample_type')
+        Halos_id = post_fuction('Halos_id')
+        source = post_fuction('source')
+        species_taxid = post_fuction('species_taxid')
+        taxid = post_fuction('taxid')
+        Description = post_fuction('Description')
+        
+        reference = post_fuction('reference')
+        reference_list = reference.split(',')
+        reference1 = reference_list[0]
+        reference2 = reference_list[1]
+        reference3 = reference_list[2]
+        reference4 = reference_list[3]
+        reference5 = reference_list[4]
+        
+        now = datetime.now()
+        data_source = post_fuction('data_source')
+        data_status = post_fuction('data_status')
+        
+        # try:        
+        #     obj = models.reference_summary.objects.get(db_id=db_id,orgranism_name=organism_name,chinese_name=chinese_name,genus=genus,species_name=species_name,gram_stain=gram_stain,top_type=top_type,source=source,key_word=keyword,Halos_id=Halos_id,taxid=taxid,Description=Description,reference1=reference1,reference2=reference2,reference3=reference3,reference4=reference4,reference5=reference5,date=now,data_source=data_source,data_status=data_status )
+        # except models.db_search_log.DoesNotExist:
+        #     obj = models.reference_summary(db_id=db_id,orgranism_name=organism_name,chinese_name=chinese_name,genus=genus,species_name=species_name,gram_stain=gram_stain,top_type=top_type,source=source,key_word=keyword,Halos_id=Halos_id,taxid=taxid,Description=Description,reference1=reference1,reference2=reference2,reference3=reference3,reference4=reference4,reference5=reference5,date=now,data_source=data_source,data_status=data_status)
+        #     obj.save()
+        
+        # POST value:
+        # db_id,organism_name,chinese_name,genus,top_type,
+        # species_name,keyword,gram_stain,sample_type,Halos_id,
+        # species_taxid,taxid,the_user,Description,
+        # reference1,reference2,reference3,reference4,reference5,
+        # data_source,data_status
+        #
+        # DB column:
+        # db_id,orgranism_name,chinese_name,
+        # genus,species_name,gram_stain,top_type,
+        # source,key_word
+        # Halos_id,taxid,Description,
+        # reference1,reference2,reference3,reference4,reference5,
+        # date,data_source,data_status
     
-    try:
-        the_user = request.POST['source']
-    except KeyError:
-        the_user = "unknown"
-    
-    
-    
-    
-    # Description
-    try:
-        Description = request.POST['Description']
-    except KeyError:
-        Description = ""
-    # reference1
-    try:
-        reference1 = request.POST['reference1']
-    except KeyError:
-        reference1 = ""
-    # reference2
-    try:
-        reference2 = request.POST['reference2']
-    except KeyError:
-        reference2 = ""
-    # reference3
-    try:
-        reference3 = request.POST['reference3']
-    except KeyError:
-        reference3 = ""
-    # reference4
-    try:
-        reference4 = request.POST['reference4']
-    except KeyError:
-        reference4 = ""
-    # reference5
-    try:
-        reference5 = request.POST['reference5']
-    except KeyError:
-        reference5 = ""
-    # data_source
-    try:
-        data_source = request.POST['data_source']
-    except KeyError:
-        data_source = ""
-    # data_status
-    try:
-        data_status = request.POST['data_status']
-    except KeyError:
-        data_status = ""
-    
-    return render(request, './content/new_input_check.html', locals())
+        return render(request, './content/new_input.html', locals())
+    else:
+        return render(request, './content/new_input.html', locals())
 
 ### Search db 
 def search_result(request):
