@@ -202,10 +202,10 @@ def input_upload(request):
         try:        
             obj = models.reference_summary.objects.get(db_id=db_id)
         except models.reference_summary.DoesNotExist:
-            obj = models.reference_summary(db_id=db_id,orgranism_name=organism_name,chinese_name=chinese_name,genus=genus,species_name=species_name,gram_stain=gram_stain,top_type=top_type,source=source,key_word=keyword,sample_type=sample_type,Halos_id=Halos_id,taxid=taxid,species_taxid=species_taxid,Description=Description,reference1=reference1,reference2=reference2,reference3=reference3,reference4=reference4,reference5=reference5,date=now,data_source=data_source,data_status=data_status)
+            obj = models.reference_summary(db_id=db_id,organism_name=organism_name,chinese_name=chinese_name,genus=genus,species_name=species_name,gram_stain=gram_stain,top_type=top_type,source=source,key_word=keyword,sample_type=sample_type,Halos_id=Halos_id,taxid=taxid,species_taxid=species_taxid,Description=Description,reference1=reference1,reference2=reference2,reference3=reference3,reference4=reference4,reference5=reference5,date=now,data_source=data_source,data_status=data_status)
             obj.save()
             message="Upload_successfully"
-        # db_id=db_id,orgranism_name=organism_name,chinese_name=chinese_name,genus=genus,species_name=species_name,gram_stain=gram_stain,top_type=top_type,source=source,key_word=key_word,sample_type=sample_type,Halos_id=Halos_id,taxid=taxid,species_taxid=species_taxid,Description=Description,reference1=reference1,reference2=reference2,reference3=reference3,reference4=reference4,reference5=reference5,date=now,data_source=data_source,data_status=data_status
+        # db_id=db_id,organism_name=organism_name,chinese_name=chinese_name,genus=genus,species_name=species_name,gram_stain=gram_stain,top_type=top_type,source=source,key_word=key_word,sample_type=sample_type,Halos_id=Halos_id,taxid=taxid,species_taxid=species_taxid,Description=Description,reference1=reference1,reference2=reference2,reference3=reference3,reference4=reference4,reference5=reference5,date=now,data_source=data_source,data_status=data_status
 
         # POST value:
         # db_id,organism_name,chinese_name,
@@ -216,7 +216,7 @@ def input_upload(request):
         # now,data_source,data_status
         #
         # DB column:
-        # db_id,orgranism_name,chinese_name,
+        # db_id,organism_name,chinese_name,
         # genus,species_name,gram_stain,
         # top_type,source,key_word,sample_type,
         # Halos_id,taxid,species_taxid,Description,
@@ -252,8 +252,8 @@ def search_result(request):
             return render(request, './content/search_result.html', locals())
         elif category in ('db_id'):
             entry_list = list(models.reference_summary.objects.filter(db_id__contains=input_text))
-        elif category in ('orgranism_name'):
-            entry_list = list(models.reference_summary.objects.filter(orgranism_name__contains=input_text))
+        elif category in ('organism_name'):
+            entry_list = list(models.reference_summary.objects.filter(organism_name__contains=input_text))
             category="物種名"
         elif category in ('chinese_name'):
             entry_list = list(models.reference_summary.objects.filter(chinese_name__contains=input_text))

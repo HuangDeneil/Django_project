@@ -50,7 +50,7 @@ class gene_info(models.Model):
 
 class reference_summary(models.Model): 
     db_id = models.CharField(max_length=30, blank=True, null=True)
-    orgranism_name = models.CharField(max_length=100, blank=True, null=True, default='') 
+    organism_name = models.CharField(max_length=100, blank=True, null=True, default='') 
     chinese_name = models.CharField(max_length=100, null=True, blank=True, default='')  
     genus = models.CharField(max_length=100, null=True, blank=True, default='')  
     species_name = models.CharField(max_length=100, blank=True, null=True, default='')  
@@ -69,14 +69,14 @@ class reference_summary(models.Model):
     reference4 = models.TextField(null=True, blank=True)  
     reference5 = models.TextField(null=True, blank=True)  
     date = models.DateField(null=True, blank=True, auto_now=True)
-    data_source = models.CharField(max_length=200,null=True, default='unknow', blank=True)  
-    data_status = models.CharField(max_length=200,null=True, default='unknow', blank=True)  
+    data_source = models.CharField(max_length=200,null=True, default='', blank=True)  
+    data_status = models.CharField(max_length=200,null=True, default='', blank=True)  
     class Meta:
       #  ordering = ('pub_date',)   #  正排序
         ordering = ('-date',) #  反排序
 
     def __str__(self):
-        return self.orgranism_name
+        return self.organism_name
 
 
 
@@ -88,22 +88,7 @@ class db_search_log(models.Model):
 
 
 
-"""
-class Comment(models.Model):
-    content = models.CharField(max_length=200)
-    visitor = models.CharField(max_length=20)
-    email = models.EmailField(max_length=20)
-    date_time = models.DateTimeField(null=True, blank=True, auto_now=True)
-    restaurant = models.ForeignKey('Restaurant', on_delete=models.CASCADE)
-    
 
-class Restaurant(models.Model):
-    name = models.CharField(max_length=20)
-    phone_number = models.CharField(max_length=15)
-    address = models.CharField(max_length=50, blank=True)
-
-
-"""
 
 
 
