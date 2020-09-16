@@ -17,7 +17,7 @@
     {% endif %}
     {% if message == "Upload_successfully" %}
         <table>
-            <tr><td>{{db_id}} {{organism_name}} <p>Upload successfully !!</p> </td></tr>
+            <tr><td><p>{{db_id}} {{organism_name}} &ensp;&ensp; Upload successfully !!</p> </td></tr>
         </table>
     {% endif %}
   <h2 style="font-family:微軟正黑體;text-transform:initial;font-size:150%">基礎資訊</h2>
@@ -184,8 +184,8 @@
   </table>
   <table>
     <tr>
-      <td>&ensp;物種描述:</br>&ensp;Description</td>
-      <td><textarea class=textarea_typ1 type="text" name="Description" id="Description" rows="5" cols="130"></textarea><span class="error">* </span></td>
+      <td>&ensp;物種描述:<span class="error">* </span></br>&ensp;Description</td>
+      <td><textarea class=textarea_typ1 type="text" name="Description" id="Description" rows="5" cols="130"></textarea></td>
     </tr>
   </table>
   </br>
@@ -194,8 +194,8 @@
   <svg height="7" width="1200"><line x1="0" y1="0" x2="1300" y2="0" style="stroke:rgb(0,150,255);stroke-width:2" /></svg>
   <table>
     <tr>
-      <td>文獻1</br>reference1:</td>
-      <td><textarea class=textarea_typ1 type="text" name="reference1" id="reference1" rows="2" cols="130" id="order_form"></textarea><span class="error">* </span></td>
+      <td>文獻1<span class="error">* </span></br>reference1:</td>
+      <td><textarea class=textarea_typ1 type="text" name="reference1" id="reference1" rows="2" cols="130" id="order_form"></textarea></td>
     </tr>
     <tr>
       <td>文獻2</br>reference2:</td>

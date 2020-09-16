@@ -165,27 +165,31 @@ def input_upload(request):
         data_source = post_fuction('data_source')
         data_status = post_fuction('data_status')
         
-        # try:        
-        #     obj = models.reference_summary.objects.get(db_id=db_id,orgranism_name=organism_name,chinese_name=chinese_name,genus=genus,species_name=species_name,gram_stain=gram_stain,top_type=top_type,source=source,key_word=keyword,Halos_id=Halos_id,taxid=taxid,Description=Description,reference1=reference1,reference2=reference2,reference3=reference3,reference4=reference4,reference5=reference5,date=now,data_source=data_source,data_status=data_status )
-        # except models.db_search_log.DoesNotExist:
-        #     obj = models.reference_summary(db_id=db_id,orgranism_name=organism_name,chinese_name=chinese_name,genus=genus,species_name=species_name,gram_stain=gram_stain,top_type=top_type,source=source,key_word=keyword,Halos_id=Halos_id,taxid=taxid,Description=Description,reference1=reference1,reference2=reference2,reference3=reference3,reference4=reference4,reference5=reference5,date=now,data_source=data_source,data_status=data_status)
-        #     obj.save()
-        
+        ## database upload (per single data)
+        try:        
+            obj = models.reference_summary.objects.get(db_id=db_id)
+        except models.reference_summary.DoesNotExist:
+            obj = models.reference_summary(db_id=db_id,orgranism_name=organism_name,chinese_name=chinese_name,genus=genus,species_name=species_name,gram_stain=gram_stain,top_type=top_type,source=source,key_word=keyword,sample_type=sample_type,Halos_id=Halos_id,taxid=taxid,species_taxid=species_taxid,Description=Description,reference1=reference1,reference2=reference2,reference3=reference3,reference4=reference4,reference5=reference5,date=now,data_source=data_source,data_status=data_status)
+            obj.save()
+            message="Upload_successfully"
+        # db_id=db_id,orgranism_name=organism_name,chinese_name=chinese_name,genus=genus,species_name=species_name,gram_stain=gram_stain,top_type=top_type,source=source,key_word=key_word,sample_type=sample_type,Halos_id=Halos_id,taxid=taxid,species_taxid=species_taxid,Description=Description,reference1=reference1,reference2=reference2,reference3=reference3,reference4=reference4,reference5=reference5,date=now,data_source=data_source,data_status=data_status
+
         # POST value:
-        # db_id,organism_name,chinese_name,genus,top_type,
-        # species_name,keyword,gram_stain,sample_type,Halos_id,
-        # species_taxid,taxid,the_user,Description,
+        # db_id,organism_name,chinese_name,
+        # genus,top_type,species_name,
+        # keyword,gram_stain,sample_type,
+        # Halos_id,species_taxid,taxid,source,Description,
         # reference1,reference2,reference3,reference4,reference5,
-        # data_source,data_status
+        # now,data_source,data_status
         #
         # DB column:
         # db_id,orgranism_name,chinese_name,
-        # genus,species_name,gram_stain,top_type,
-        # source,key_word
-        # Halos_id,taxid,Description,
+        # genus,species_name,gram_stain,
+        # top_type,source,key_word,sample_type,
+        # Halos_id,taxid,species_taxid,Description,
         # reference1,reference2,reference3,reference4,reference5,
         # date,data_source,data_status
-    
+        
         return render(request, './content/new_input.html', locals())
     else:
         return render(request, './content/new_input.html', locals())
@@ -200,7 +204,11 @@ def search_result(request):
         try:
             the_user = request.POST['source']
         except KeyError:
-            the_user = "unknown"
+            the_user = ""
+        
+        ##########################################
+        ### Saving search log upload database 
+        ### (input_word,category,date_time)
         try:        
             obj = models.db_search_log.objects.get( input_word=input_text, category=category,user=the_user,date_time=now)
         except models.db_search_log.DoesNotExist:
@@ -235,8 +243,7 @@ def search_result(request):
         elif category in ('Description'):
             entry_list = list(models.reference_summary.objects.filter(Description__contains=input_text))
         
-        ## saving search log
-        #(input_word,category,date_time)
+        
         return render(request, './content/search_result.html', locals())
         '''
         db = models.reference_summary.objects.extra(select={'category': 'SELECT * FROM reference_summary WHERE blog_entry.blog_id = blog_blog.id'})
@@ -272,56 +279,3 @@ def search_result(request):
 
 
 
-
-
-'''
-## data
-def data_detail(request):
-    try:
-        p = reference_summary.objects.get(db_id=db_id)
-    except reference_summary.DoesNotExist:
-        raise Http404('Cannot found objects')
-    return render(request, 'disp.html', locals())
-
-def comment(request, id):
-    if id:
-        r = Restaurant.objects.get(id=id)
-    else:
-        return HttpResponseRedirect("restaurants_list")
-    if request.POST:
-        visitor = request.POST['visitor']
-        content = request.POST['content']
-        email = request.POST['email']
-        date_time = timezone.localtime(timezone.now()) # 擷取現在時間
-        Comment.objects.create(visitor=visitor, email=email, content=content, date_time=date_time, restaurant=r)
-    return render(request, 'comments.html', locals())
-
-def list_restaurants(request):
-    restaurants = models.Restaurant.objects.all()
-    return render_to_response('./restaurants_list.html', locals())
-
-def login(request):
-    if request.user.is_authenticated():
-        return redirect('admin_page')
-
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = auth.authenticate(username=username, password=password)
-
-        if user is not None:
-            # correct username and password login the user
-            auth.login(request, user)
-            return redirect('admin_page')
-
-        else:
-            messages.error(request, 'Error wrong username/password')
-
-    return render(request, 'blog/login.html')
-def detail(request, id):
-    try:
-        info = models.gene_info.objects.get(id=id)
-    except:
-        pass
-    return render(request, 'detail.html', locals())
-'''
