@@ -15,6 +15,39 @@ def logout(request):
 ## View DB
 def reference_summary(request):
     info = models.reference_summary.objects.all()
+    
+    total_count = 0
+    bacteria_count = 0
+    fungi_count = 0
+    virus_count = 0
+    archaea_count = 0
+    parasite_count = 0
+    Mycoplasma_count = 0
+    
+    for i in info:
+        total_count = total_count + 1
+        if i.top_type == "bacteria":
+            bacteria_count += 1
+        elif i.top_type == "archaea":
+            archaea_count += 1
+        elif i.top_type == "fungi":
+            fungi_count += 1
+        elif i.top_type == "virus":
+            virus_count += 1
+        elif i.top_type == "archaea":
+            archaea_count += 1
+        elif i.top_type == "parasite":
+            parasite_count += 1
+        elif i.top_type == "Mycoplasma/Chlamydia/Rickettsia":
+            Mycoplasma_count += 1
+# bacteria
+# archaea
+# fungi
+# virus
+# parasite
+# Mycoplasma/Chlamydia/Rickettsia
+                  
+    
     now = datetime.now()
     return render(request, './content/call_db.html', locals())
 
@@ -243,7 +276,30 @@ def search_result(request):
         elif category in ('Description'):
             entry_list = list(models.reference_summary.objects.filter(Description__contains=input_text))
         
+        total_count = 0
+        bacteria_count = 0
+        fungi_count = 0
+        virus_count = 0
+        archaea_count = 0
+        parasite_count = 0
+        Mycoplasma_count = 0
         
+        for i in entry_list:
+            total_count = total_count + 1
+            if i.top_type == "bacteria":
+                bacteria_count += 1
+            elif i.top_type == "archaea":
+                archaea_count += 1
+            elif i.top_type == "fungi":
+                fungi_count += 1
+            elif i.top_type == "virus":
+                virus_count += 1
+            elif i.top_type == "archaea":
+                archaea_count += 1
+            elif i.top_type == "parasite":
+                parasite_count += 1
+            elif i.top_type == "Mycoplasma/Chlamydia/Rickettsia":
+                Mycoplasma_count += 1
         return render(request, './content/search_result.html', locals())
         '''
         db = models.reference_summary.objects.extra(select={'category': 'SELECT * FROM reference_summary WHERE blog_entry.blog_id = blog_blog.id'})

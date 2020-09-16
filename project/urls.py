@@ -32,6 +32,7 @@ urlpatterns = [
     
     ## view db
     path('db', views.reference_summary),
+    path('db/', views.reference_summary),
     
     ## input new data for non-developer
     path('new_input',views.new_input),
@@ -39,6 +40,7 @@ urlpatterns = [
     path('new_input/input_check',views.new_input_check),
     path('input_check/',views.new_input_check),
     path('input_check',views.new_input_check),
+    path('input_upload/',views.input_upload),
     path('input_upload',views.input_upload),
 
     
