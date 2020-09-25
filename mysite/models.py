@@ -72,8 +72,7 @@ class reference_summary(models.Model):
     data_source = models.CharField(max_length=200,null=True, default='', blank=True)  
     data_status = models.CharField(max_length=200,null=True, default='', blank=True)  
     class Meta:
-      #  ordering = ('pub_date',)   #  正排序
-        ordering = ('-date',) #  反排序
+        ordering = ('db_id',) 
 
     def __str__(self):
         return self.organism_name
