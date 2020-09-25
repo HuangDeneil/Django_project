@@ -14,7 +14,8 @@ def logout(request):
 
 ## View DB
 def reference_summary(request):
-    info = models.reference_summary.objects.all()
+    info = models.reference_summary.objects.order_by('db_id')
+    #sorted(info, key=lambda car: car.compute_score)
     
     total_count = 0
     bacteria_count = 0
