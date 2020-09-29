@@ -11,6 +11,16 @@
     {% block content %}
 
 {% if user.is_authenticated %}
+
+<style>
+td, th {
+  border: 1px solid ##dddddd ;
+  text-align: left;
+  padding: 5px;
+}
+</style>
+
+
 <div id="wrapper" class="container">
     <form name="table_value" method="GET" action="search_engine"> {% csrf_token %}
 	<table>
@@ -38,12 +48,12 @@
             </tr>
                 <tr>
                     <td>ID: {{ i.db_id }}</td>
-                    <td>organism_name: <i>{{ i.organism_name }}</i></td>
-                    <td>chinese_name: {{ i.chinese_name }}</td>
+                    <td>Organism name: <i>{{ i.organism_name }}</i></td>
+                    <td>Chinese name: {{ i.chinese_name }}</td>
                 </tr>
                 <tr>
-                    <td>genus: <i>{{ i.genus }}</i></td>
-                    <td>type: {{ i.top_type }}</td>
+                    <td>Genus: <i>{{ i.genus }}</i></td>
+                    <td>Type: {{ i.top_type }}</td>
                     <td></td>
                 </tr>
         </table>
@@ -51,23 +61,23 @@
         <table>
             <tr></tr>
             <tr>
-                <td>source: {{ i.source }}</td>
-                <td>taxid: {{ i.taxid }}</td>
+                <td>Source: {{ i.source }}</td>
+                <td>Taxid: {{ i.taxid }}</td>
                 
             </tr>
         </table>
         
         <table>  
-        <tr><td>Halos_id: {{ i.Halos_id }}</td></tr>
+        <tr><td>Halos id : &ensp;{{ i.Halos_id }}</td></tr>
+        <tr><td>keyword : &ensp;{{ i.key_word }}</td></tr>
         </table>       
         <table>
-            <tr><td>key_word: </td><td>{{ i.key_word }}</td></tr>
-            <tr><td>Description: </td><td>{{ i.Description }}</td></tr>
-            <tr><td>reference 1: </td><td>{{ i.reference1 }}{% if i.reference1 %} <a href="https://scholar.google.com/scholar?q={{ i.reference1 }}" >link</a> {% endif %}</td></tr>
-            <tr><td>reference 2: </td><td>{{ i.reference2 }}{% if i.reference2 %} <a href="https://scholar.google.com/scholar?q={{ i.reference2 }}" >link</a> {% endif %}</td></tr>
-            <tr><td>reference 3: </td><td>{{ i.reference3 }}{% if i.reference3 %} <a href="https://scholar.google.com/scholar?q={{ i.reference3 }}" >link</a> {% endif %}</td></tr>
-            <tr><td>reference 4: </td><td>{{ i.reference4 }}{% if i.reference4 %} <a href="https://scholar.google.com/scholar?q={{ i.reference4 }}" >link</a> {% endif %}</td></tr>
-            <tr><td>reference 5: </td><td>{{ i.reference5 }}{% if i.reference5 %} <a href="https://scholar.google.com/scholar?q={{ i.reference5 }}" >link</a> {% endif %}</td></tr>
+            <tr><td>Description </td><td>{{ i.Description }}</td></tr>
+            <tr><td>reference 1 </td><td>{{ i.reference1 }}{% if i.reference1 %} <a href="https://scholar.google.com/scholar?q={{ i.reference1 }}" >link</a> {% endif %}</td></tr>
+            <tr><td>reference 2 </td><td>{{ i.reference2 }}{% if i.reference2 %} <a href="https://scholar.google.com/scholar?q={{ i.reference2 }}" >link</a> {% endif %}</td></tr>
+            <tr><td>reference 3 </td><td>{{ i.reference3 }}{% if i.reference3 %} <a href="https://scholar.google.com/scholar?q={{ i.reference3 }}" >link</a> {% endif %}</td></tr>
+            <tr><td>reference 4 </td><td>{{ i.reference4 }}{% if i.reference4 %} <a href="https://scholar.google.com/scholar?q={{ i.reference4 }}" >link</a> {% endif %}</td></tr>
+            <tr><td>reference 5 </td><td>{{ i.reference5 }}{% if i.reference5 %} <a href="https://scholar.google.com/scholar?q={{ i.reference5 }}" >link</a> {% endif %}</td></tr>
         </table>
             <br><br><br>
     <!-- </form>  https://scholar.google.com/scholar?q=   -->
