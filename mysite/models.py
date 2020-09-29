@@ -59,7 +59,7 @@ class reference_summary(models.Model):
     source = models.CharField(max_length=200, blank=True,null=True, default='')  ## input user name
     key_word = models.TextField(blank=True, null=True, default='')  
     sample_type = models.TextField(blank=True, null=True, default='')  
-    Halos_id = models.CharField(max_length=100, null=True, blank=True, default='')  
+    Halos_id = models.TextField(null=True, blank=True, default='') 
     taxid = models.CharField(max_length=100, blank=True, null=True, default='')  
     species_taxid = models.CharField(max_length=100, blank=True, null=True, default='')  
     Description = models.TextField(null=True, blank=True, default='')  

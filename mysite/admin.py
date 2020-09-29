@@ -23,7 +23,7 @@ class gene_infoAdmin(admin.ModelAdmin):
 
 class reference_summaryAdmin(admin.ModelAdmin):
     list_display=('db_id','organism_name','top_type','key_word','Description','taxid')    #  要顯示的欄位
-    search_fields=('db_id','organism_name','taxid','top_type','key_word','sample_type','Description') 
+    search_fields=('db_id','organism_name','taxid','top_type','key_word','sample_type','Halos_id','Description') 
 
 
 class db_search_logAdmin(admin.ModelAdmin):

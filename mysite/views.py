@@ -228,7 +228,11 @@ def input_upload(request):
     else:
         return render(request, './content/new_input.html', locals())
 
-### Search db 
+###########################
+#####                 #####
+#####    Search db    #####
+#####                 #####
+###########################
 def search_result(request):
     if request.method == 'POST':
         now = datetime.now()
