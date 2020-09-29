@@ -60,21 +60,11 @@
         <table>
             <tr><td>key_word: </td><td>{{ i.key_word }}</td></tr>
             <tr><td>Description: </td><td>{{ i.Description }}</td></tr>
-            {% if i.reference1 %}
-            <tr><td>reference 1: </td><td>{{ i.reference1 }} <a href="https://scholar.google.com/scholar?q={{ i.reference1 }}" >link</a> </td></tr>
-            {% endif %}
-            {% if i.reference2 %}
-            <tr><td>reference 2: </td><td>{{ i.reference2 }} <a href="https://scholar.google.com/scholar?q={{ i.reference2 }}" >link</a> </td></tr>
-            {% endif %}
-            {% if i.reference3 %}
-            <tr><td>reference 3: </td><td>{{ i.reference3 }} <a href="https://scholar.google.com/scholar?q={{ i.reference3 }}" >link</a> </td></tr>
-            {% endif %}
-            {% if i.reference4 %}
-            <tr><td>reference 4: </td><td>{{ i.reference4 }} <a href="https://scholar.google.com/scholar?q={{ i.reference4 }}" >link</a> </td></tr>
-            {% endif %}
-            {% if i.reference5 %}
-            <tr><td>reference 5: </td><td>{{ i.reference5 }} <a href="https://scholar.google.com/scholar?q={{ i.reference5 }}" >link</a> </td></tr>
-            {% endif %}
+            <tr><td>reference 1: </td><td>{{ i.reference1 }}{% if i.reference1 %} <a href="https://scholar.google.com/scholar?q={{ i.reference1 }}" >link</a> {% endif %}</td></tr>
+            <tr><td>reference 2: </td><td>{{ i.reference2 }}{% if i.reference2 %} <a href="https://scholar.google.com/scholar?q={{ i.reference2 }}" >link</a> {% endif %}</td></tr>
+            <tr><td>reference 3: </td><td>{{ i.reference3 }}{% if i.reference3 %} <a href="https://scholar.google.com/scholar?q={{ i.reference3 }}" >link</a> {% endif %}</td></tr>
+            <tr><td>reference 4: </td><td>{{ i.reference4 }}{% if i.reference4 %} <a href="https://scholar.google.com/scholar?q={{ i.reference4 }}" >link</a> {% endif %}</td></tr>
+            <tr><td>reference 5: </td><td>{{ i.reference5 }}{% if i.reference5 %} <a href="https://scholar.google.com/scholar?q={{ i.reference5 }}" >link</a> {% endif %}</td></tr>
         </table>
             <br><br><br>
     <!-- </form>  https://scholar.google.com/scholar?q=   -->
