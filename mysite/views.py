@@ -257,6 +257,7 @@ def search_result(request):
             return render(request, './content/search_result.html', locals())
         elif category in ('db_id'):
             entry_list = list(models.reference_summary.objects.filter(db_id__contains=input_text))
+            category="db_id"
         elif category in ('organism_name'):
             entry_list = list(models.reference_summary.objects.filter(organism_name__contains=input_text))
             category="物種名"
@@ -266,6 +267,9 @@ def search_result(request):
         elif category in ('genus'):
             entry_list = list(models.reference_summary.objects.filter(genus__contains=input_text))
             category="屬名"
+        elif category in ('gram_stain'):
+            entry_list = list(models.reference_summary.objects.filter(gram_stain__contains=input_text))
+            category="gram_stain"
         elif category in ('top_type'):
             entry_list = list(models.reference_summary.objects.filter(top_type__contains=input_text))
             category="大分類"
@@ -280,6 +284,9 @@ def search_result(request):
             entry_list = list(models.reference_summary.objects.filter(key_word__contains=input_text))
         elif category in ('Description'):
             entry_list = list(models.reference_summary.objects.filter(Description__contains=input_text))
+            
+            
+
         
         total_count = 0
         bacteria_count = 0
