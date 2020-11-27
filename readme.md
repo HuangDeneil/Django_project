@@ -13,18 +13,27 @@ MySQL          | 15.1
 PyMySQL        | 0.10.0
 
 <br><br>
-##### Start with chinese output
-`setting.py`<b>:
-```python
-LANGUAGE_CODE = 'zh-Hant'
 
-TIME_ZONE = 'Asia/Taipei'
+## Before started turn on web service need to Edit seeting: `setting.py`
+
+---
+
+### ip setting:
+
+`setting.py`
+
+```python
+ALLOWED_HOSTS = ['XXX.XXX.XXX.XXX', 'XXX.XXX.XXX.XXX', ...]
 ```
 
-<br><br>
-#### We change the defualt database from sqlite to MySQL
+
+
+#### We change the defualt database from sqlite to `MySQL`
+
 Its means need to edited `setting.py` in the first time before start 
 web service.
+
+
 ```python
 DATABASES = {
        "default": {
@@ -39,26 +48,35 @@ DATABASES = {
        },
    }    
 }
+
 ```
+
 <br>
-#### ip setting:
 
-`setting.py`
 
-```python
-ALLOWED_HOSTS = ['XXX.XXX.XXX.XXX']
-```
-
-#### Start Web service:
+### Start web service:
 
 ```python
 python manage.py runserver 0.0.0.0:8000
 ```
-<br>
+
+#### ps. This command is write into `web_online.sh`
+####  `sh web_online.sh` can start web service automatic   
 
 
 
 
 
+<br><br>
+
+#### Chinese output
+
+`setting.py`<b>:
+
+```python
+LANGUAGE_CODE = 'zh-Hant'
+
+TIME_ZONE = 'Asia/Taipei'
+```
 
 

@@ -1,3 +1,8 @@
 *.sqlite3
 *.json
+./tmp/*.csv
+./tmp/*.png
+./tools/*.csv
+./tools/*.png
+
 

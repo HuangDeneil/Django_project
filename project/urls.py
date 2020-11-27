@@ -49,6 +49,10 @@ urlpatterns = [
     path('search_engine', TemplateView.as_view(template_name='./content/search_engine.html')),
     path('search_result', views.search_result),
     
+    # statistics 
+    path('statistics',views.statistics),
+    path('statistics/',views.statistics),
+    
     # manage 
     path('manage',TemplateView.as_view(template_name='./content/manage.html')),
 
