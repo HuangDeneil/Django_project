@@ -6,6 +6,17 @@ from django.contrib import auth
 import pickle
 from django.contrib.auth import views as auth_views
 from mysite import views
+import re
+import os
+import sys
+import numpy as np
+import pandas as pd
+import xlrd
+import matplotlib.pyplot as plt
+import time
+import subprocess
+
+
 
 ## Login
 def logout(request):
@@ -16,6 +27,7 @@ def logout(request):
 def reference_summary(request):
     info = models.reference_summary.objects.order_by('db_id')
     #sorted(info, key=lambda car: car.compute_score)
+    
     
     total_count = 0
     bacteria_count = 0
@@ -41,14 +53,12 @@ def reference_summary(request):
             parasite_count += 1
         elif i.top_type == "Mycoplasma/Chlamydia/Rickettsia":
             Mycoplasma_count += 1
-# bacteria
-# archaea
-# fungi
-# virus
-# parasite
-# Mycoplasma/Chlamydia/Rickettsia
-                  
-    
+    # bacteria
+    # archaea
+    # fungi
+    # virus
+    # parasite
+    # Mycoplasma/Chlamydia/Rickettsia
     now = datetime.now()
     return render(request, './content/call_db.html', locals())
 
@@ -284,9 +294,6 @@ def search_result(request):
             entry_list = list(models.reference_summary.objects.filter(key_word__contains=input_text))
         elif category in ('Description'):
             entry_list = list(models.reference_summary.objects.filter(Description__contains=input_text))
-            
-            
-
         
         total_count = 0
         bacteria_count = 0
@@ -344,6 +351,212 @@ def search_result(request):
     else:
         return render(request, './content/search_engine.html')
 
+def statistics(request):
+    info = models.reference_summary.objects.order_by('db_id')
+    
+    total_count = 0
+    bacteria_count = 0
+    fungi_count = 0
+    virus_count = 0
+    archaea_count = 0
+    parasite_count = 0
+    Mycoplasma_count = 0
+
+    tmp=""
+    tmp_list=[]
+    
+    microorganism_name_list = []
+    halos_id_count = 0
+    key_word_count = 0
+    microorganism_name={}
+    halos_id_dict={}
+    key_word_dict={}
+    
+    for i in info:
+        total_count += 1
+        if i.top_type == "bacteria":
+            bacteria_count += 1
+        elif i.top_type == "archaea":
+            archaea_count += 1
+        elif i.top_type == "fungi":
+            fungi_count += 1
+        elif i.top_type == "virus":
+            virus_count += 1
+        elif i.top_type == "parasite":
+            parasite_count += 1
+        elif i.top_type == "Mycoplasma/Chlamydia/Rickettsia":
+            Mycoplasma_count += 1
+        
+        if i.organism_name:
+            microorganism_name_list.append(str(i.organism_name))
+            #microorganism_name[(str(i.organism_name))] += 1
+            tmp_list = str(i.Halos_id).split(', ')
+            halos_id_count = (len(tmp_list)-1)
+            halos_id_dict[str(i.organism_name)] = halos_id_count
+            tmp_list = str(i.key_word).split(', ')
+            key_word_count = (len(tmp_list))
+            key_word_dict[str(i.organism_name)] = key_word_count
+
+    data_dict={}
+    data_dict["bacteria"]=(bacteria_count)
+    data_dict["fungi"]=(fungi_count)
+    data_dict["virus"]=(virus_count)
+    data_dict["archaea"]=(archaea_count)
+    data_dict["parasite"]=(parasite_count)
+    data_dict["Mycoplasma/Chlamydia/Rickettsia"]=(Mycoplasma_count)    
+    
+    name1 = np.array(data_dict.keys())
+    count2 =(data_dict.values())
+    
+    name=[]
+    count=[]
+    for i in data_dict.keys():
+        name.append(i)   
+        count.append(data_dict[i])
+    
+    # colors = {
+    #     'bacteria':'#F08080', 
+    #     'fungi':'#3cb44b', 
+    #     'virus':'#F3E7B1',
+    #     'archaea': '#868497',
+    #     'parasite':"#f58231",
+    #     'Mycoplasma.Chlamydia.Rickettsia':"#73C2FB"
+    #     }
+    colors = ['cornflowerblue','darkorange','forestgreen','crimson','mediumpurple','sienna']
+
+    
+    #############################
+    #####                  ######
+    #####   pie plot 圖示  ######
+    #####                  ######
+    #############################
+    fig1, ax1 = plt.subplots()
+    wedges, texts, autotexts = ax1.pie(
+        count,
+        #labels=name,
+        colors=colors,
+        autopct='',
+        pctdistance = 1.2,
+        startangle=0,
+        rotatelabels = 270,
+        shadow = False,
+        counterclock = False,
+        radius=0
+        )
+    ax1.legend(wedges, name,
+            title="Types ",
+            loc="center left",
+            bbox_to_anchor=(-0.05, 0.1))
+    plt.setp(autotexts, size=10, weight="bold")
+    plt.savefig("./static/images/legend.png" )   # save the figure to file 
+    plt.close()
+    
+    ########################
+    #####             ######
+    #####   pie plot  ######
+    #####             ######
+    ########################
+    fig1, ax1 = plt.subplots()
+    wedges, texts, autotexts = ax1.pie(
+        count,
+        #labels=name,
+        colors=colors,
+        autopct='%1.1f%%',
+        pctdistance = 1.2,
+        startangle=0,
+        rotatelabels = 270,
+        shadow = False,
+        counterclock = False,
+        radius=1
+        )
+    ax1.axis("off")  # Equal aspect ratio ensures that pie is drawn as a circle.
+    plt.setp(autotexts, size=9, weight="bold")
+    ax1.set_title("Composition of database")
+    plt.savefig("./static/images/Pie_plot.png" )   # save the figure to file 
+    plt.close()
+    
+    
+    #############################################
+    #####                                  ######
+    #####  Microorganism_report_frequency  ######
+    #####                                  ######
+    #############################################
+    name = []
+    name = np.array( microorganism_name_list )
+    x = list( range( len(name) ) )
+    y = []
+    
+    for i in halos_id_dict.keys():
+        y.append(halos_id_dict[i])
+    txt = np.array( microorganism_name_list )
+    plt.figure(figsize = (20,10))
+    plt.scatter(x, y)
+    
+    taq=""
+    for i in range(len(x)):
+        taq = ("("+txt[i]+","+str(y[i])+")")
+        if y[i] >22:
+            plt.annotate( taq, xy = (i, y[i]), xytext = (i+0.1, y[i]+0.5) , fontsize=16)
+        
+    plt.xlabel('Microorganism index', fontsize=20)
+    plt.ylabel('Reported counts', fontsize=20) 
+    plt.title('Microorganism report frequency', fontsize=28, color='black')
+    
+    plt.savefig("./static/images/Microorganism_report_frequency.png" , dpi=300)   # save the figure to file
+    plt.close()
+    
+    
+    #############################################
+    #####                                  ######
+    #####   Microorganism_keyword_count    ######
+    #####                                  ######
+    #############################################
+    name = []
+    name = np.array( microorganism_name_list )
+    x = list( range( len(name) ) )
+    y = []
+    
+    for i in key_word_dict.keys():
+        #name.append(i)   
+        y.append(key_word_dict[i])
+    txt = np.array( microorganism_name_list )
+    plt.figure(figsize = (20,10))
+    plt.scatter(x, y)
+    taq=""
+    #count = len(y)
+    for i in range(len(x)):
+        taq = ("("+txt[i]+","+str(y[i])+")")
+        if y[i] >10:
+            plt.annotate( taq, xy = (i, y[i]), xytext = ((i-0.5), (y[i]+0.2)) , fontsize=16)
+        
+    plt.xlabel('Microorganism index', fontsize=20)
+    plt.ylabel('keyword counts', fontsize=20) 
+    #plt.title('Microorganism report frequency', fontsize=28, color='black')
+    
+    plt.savefig("./static/images/Microorganism_keyword_count.png" , dpi=300)   # save the figure to file
+    plt.close()
+    
+    
+    
+    
+    
+    #cmd = os.popen("mv ").read()    
+    
+    #path_now = os.getcwd()
+    #path_now = os.popen("ls -hal").read()
+    
+    #cmd_data = ""
+    #cmd_data = os.popen("Rscript --version").read().split('\n')
+    
+    #test_cmd = os.popen("cd tools ; Rscript summary_data_plot.sh" ).read().split('\n')
+    #test_cmd = os.popen( "cat ./tmp/summary_data.csv 1>&2" ).read().split('\n')
+    #test_cmd = os.popen( "perl perl_test.pl" ).read().split('\n')
+
+    #cmd = os.popen("ls -hal").read().split('\n')
+    #cms = os.popen(" if [ -f './tmp/summary_data.csv' ] ; then rm summary_data.csv ; fi ").read().split('\n')
+    #print(path_now) 
+    
+    return render(request, './content/statistics.html', locals())
 
 
 
