@@ -1,3 +1,4 @@
+### Django ignore ###
 *.sqlite3
 *.json
 ./tmp/*.csv
@@ -6,3 +7,10 @@
 ./tools/*.png
 
 
+__pycache__
+
+
+
+Microorganism_keyword_count.png
+Microorganism_report_frequency.png
+Pie_plot.png
