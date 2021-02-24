@@ -4,15 +4,5 @@
 ./tmp/*.png
 ./tools/*.csv
 ./tools/*.png
-*36.pyc
-*38.pyc
-
-*/__pycache__
-*/__pycache__/*
-__pycache__/
-mysite/__pycache__/
-mysite/migrations/__pycache__/
-project/__pycache__/
-
 
 

@@ -472,7 +472,7 @@ def statistics(request):
     ax1.axis("off")  # Equal aspect ratio ensures that pie is drawn as a circle.
     plt.setp(autotexts, size=9, weight="bold")
     ax1.set_title("Composition of database")
-    plt.savefig("./static/images/Pie_plot.png" )   # save the figure to file 
+    plt.savefig("./static/images/Pie_plot.png", dpi=400 )   # save the figure to file 
     plt.close()
     
     
@@ -497,15 +497,18 @@ def statistics(request):
         taq = ("("+txt[i]+","+str(y[i])+")")
         if y[i] >22:
             plt.annotate( taq, xy = (i, y[i]), xytext = (i+0.1, y[i]+0.5) , fontsize=16)
-        
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)   
     plt.xlabel('Microorganism index', fontsize=20)
     plt.ylabel('Reported counts', fontsize=20) 
     plt.title('Microorganism report frequency', fontsize=28, color='black')
     
-    plt.savefig("./static/images/Microorganism_report_frequency.png" , dpi=300)   # save the figure to file
+    plt.savefig("./static/images/Microorganism_report_frequency.png" , dpi=400)   # save the figure to file
     plt.close()
     
-    
+    halos_id_dict ={}
+    data_dict ={}
+    txt =[]
     #############################################
     #####                                  ######
     #####   Microorganism_keyword_count    ######
@@ -515,25 +518,64 @@ def statistics(request):
     name = np.array( microorganism_name_list )
     x = list( range( len(name) ) )
     y = []
-    
+    x = len(x)
+    name = []
     for i in key_word_dict.keys():
         #name.append(i)   
         y.append(key_word_dict[i])
     txt = np.array( microorganism_name_list )
-    plt.figure(figsize = (20,10))
-    plt.scatter(x, y)
-    taq=""
-    #count = len(y)
-    for i in range(len(x)):
-        taq = ("("+txt[i]+","+str(y[i])+")")
-        if y[i] >10:
-            plt.annotate( taq, xy = (i, y[i]), xytext = ((i-0.5), (y[i]+0.2)) , fontsize=16)
-        
-    plt.xlabel('Microorganism index', fontsize=20)
-    plt.ylabel('keyword counts', fontsize=20) 
-    #plt.title('Microorganism report frequency', fontsize=28, color='black')
     
-    plt.savefig("./static/images/Microorganism_keyword_count.png" , dpi=300)   # save the figure to file
+    key_word_dict ={}
+    
+    
+    length_dict = {}
+    tmp=0
+    for i in range(len(y)):
+        tmp = int( y[i] )
+        #length_dict[tmp] = "test"
+        try:
+            length_dict[tmp] += 1 
+        except KeyError:
+            length_dict[tmp] = 0
+    
+    
+    len_name = []
+    len_disbuted = []
+    
+    len_name = np.array(list(sorted(length_dict.keys())))
+    len_disbuted = list(range(len(len_name)))
+    
+    for i in list(range(len(len_name))):
+        len_disbuted[i] = int(length_dict[len_name[i]])
+    
+    
+    x=len_name
+    y=len_disbuted
+    txt =x
+    bar_width = 0.5
+    
+    
+    plt.figure(figsize = (20,10))
+    plt.bar(len_name,
+            len_disbuted,
+            bar_width,      # 設定長條寬度
+            alpha=.6
+            )
+    
+    
+    taq=""
+    k=1
+    for i in range(len(len_disbuted)):
+        taq = (str(y[i]))
+        plt.annotate( taq, xy = (i, y[i]), xytext = (i-0.1, y[i]+3) , fontsize=16)
+    
+    plt.xticks(len_name,fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.xlabel('keyword counts', fontsize=20)
+    plt.ylabel('Microorganism counts', fontsize=20) 
+    # #plt.title('Microorganism report frequency', fontsize=28, color='black')
+    
+    plt.savefig("./static/images/Microorganism_keyword_count.png" , dpi=400)   # save the figure to file
     plt.close()
     
     
@@ -555,6 +597,8 @@ def statistics(request):
     #cmd = os.popen("ls -hal").read().split('\n')
     #cms = os.popen(" if [ -f './tmp/summary_data.csv' ] ; then rm summary_data.csv ; fi ").read().split('\n')
     #print(path_now) 
+    
+    #microorganism_name_list =[]
     
     return render(request, './content/statistics.html', locals())
 
