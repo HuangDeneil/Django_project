@@ -567,8 +567,8 @@ def statistics(request):
     k=1
     for i in range(len(len_disbuted)):
         taq = (str(y[i]))
-        plt.annotate( taq, xy = (i, y[i]), xytext = (i-0.1, y[i]+3) , fontsize=16)
-    
+        plt.annotate( taq, xy = ((i+1), y[i]), xytext = (i+0.85, y[i]+3) , fontsize=16)
+        #print("<p>"+i+","+y[i]+"</p>")
     plt.xticks(len_name,fontsize=20)
     plt.yticks(fontsize=20)
     plt.xlabel('keyword counts', fontsize=20)
@@ -578,27 +578,6 @@ def statistics(request):
     plt.savefig("./static/images/Microorganism_keyword_count.png" , dpi=400)   # save the figure to file
     plt.close()
     
-    
-    
-    
-    
-    #cmd = os.popen("mv ").read()    
-    
-    #path_now = os.getcwd()
-    #path_now = os.popen("ls -hal").read()
-    
-    #cmd_data = ""
-    #cmd_data = os.popen("Rscript --version").read().split('\n')
-    
-    #test_cmd = os.popen("cd tools ; Rscript summary_data_plot.sh" ).read().split('\n')
-    #test_cmd = os.popen( "cat ./tmp/summary_data.csv 1>&2" ).read().split('\n')
-    #test_cmd = os.popen( "perl perl_test.pl" ).read().split('\n')
-
-    #cmd = os.popen("ls -hal").read().split('\n')
-    #cms = os.popen(" if [ -f './tmp/summary_data.csv' ] ; then rm summary_data.csv ; fi ").read().split('\n')
-    #print(path_now) 
-    
-    #microorganism_name_list =[]
     
     return render(request, './content/statistics.html', locals())
 
