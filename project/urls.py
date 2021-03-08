@@ -59,6 +59,7 @@ urlpatterns = [
     ## login interface
     path('accounts/', include('django.contrib.auth.urls')),
     
+    path('report-taq', views.file_upload, name='my-view'),
     path('upload-test', views.my_view, name='my-view'),
 
 ]
