@@ -58,6 +58,7 @@ urlpatterns = [
 
     ## login interface
     path('accounts/', include('django.contrib.auth.urls')),
-
+    
+    path('upload-test', views.my_view, name='my-view'),
 
 ]

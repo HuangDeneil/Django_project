@@ -3,9 +3,9 @@ from django.http import HttpResponse, HttpResponseRedirect, request
 from mysite import models
 from datetime import datetime
 from django.contrib import auth
-import pickle
 from django.contrib.auth import views as auth_views
 from mysite import views
+import pickle
 import re
 import os
 import sys
@@ -16,14 +16,28 @@ import matplotlib.pyplot as plt
 import time
 import subprocess
 
+## upload model
+from django.shortcuts import redirect, render
+from .models import Document
+from .forms import DocumentForm
 
 
-## Login
+####################
+###              ###
+###  Login page  ###
+###              ###
+####################
 def logout(request):
     auth.logout(request)
     return render(request,'./registration/logged_out.html/')
 
-## View DB
+
+
+##################
+###            ###
+###   View DB  ###
+###            ###
+##################
 def reference_summary(request):
     info = models.reference_summary.objects.order_by('db_id')
     #sorted(info, key=lambda car: car.compute_score)
@@ -67,7 +81,13 @@ def new_input(request):
     return render(request, './content/new_input.html', locals())
 
 
-## input new data 
+
+########################
+###                  ###
+###  Input new data  ###
+###     (填新表單)    ###
+###                  ###
+########################
 def new_input_check(request):
     def post_fuction(value):
         try:
@@ -169,6 +189,13 @@ def new_input_check(request):
     else:
         return render(request, './content/new_input.html', locals())
 
+
+#########################
+###                   ###
+###  Upload new data  ###
+###   (上傳新表單)     ###
+###                   ###
+#########################
 def input_upload(request):
     def post_fuction(value):
         try:
@@ -351,6 +378,15 @@ def search_result(request):
     else:
         return render(request, './content/search_engine.html')
 
+
+
+
+################################
+#####                      #####
+#####      Statistics      #####
+#####  建立統計資訊現場畫圖  #####
+#####                      #####
+################################
 def statistics(request):
     info = models.reference_summary.objects.order_by('db_id')
     
@@ -580,6 +616,32 @@ def statistics(request):
     
     
     return render(request, './content/statistics.html', locals())
+
+
+def my_view(request):
+    print(f"Great! You're using Python 3.6+. If you fail here, use the right version.")
+    message = 'Upload as many files as you want!'
+    # Handle file upload
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            newdoc = Document(docfile=request.FILES['docfile'])
+            newdoc.save()
+
+            # Redirect to the document list after POST
+            return redirect('my-view')
+        else:
+            message = 'The form is not valid. Fix the following error:'
+    else:
+        form = DocumentForm()  # An empty, unbound form
+
+    # Load documents for the list page
+    documents = Document.objects.all()
+
+    # Render list page with the documents and the form
+    context = {'documents': documents, 'form': form, 'message': message}
+    return render(request, 'list.html', locals())
+
 
 
 
