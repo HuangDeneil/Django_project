@@ -8,6 +8,8 @@
 
 
 __pycache__
+media/
+migrations
 
 *.pyc
 
@@ -15,3 +17,5 @@ __pycache__
 Microorganism_keyword_count.png
 Microorganism_report_frequency.png
 Pie_plot.png
+
+

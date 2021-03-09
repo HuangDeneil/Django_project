@@ -90,9 +90,12 @@ class db_search_log(models.Model):
 
 
 class Document(models.Model):
-    docfile = models.FileField(upload_to='documents/%Y/%m/%d')
+    docfile = models.FileField(upload_to='documents/upload')
+    # upload_file = models.FileField()    
+    upload_date = models.DateTimeField(auto_now_add =True)
 
-
-
+# class document(models.Model):
+#     docfile = models.FileField(upload_to='documents/%Y/%m/%d')
+#     # upload_file = models.FileField()    
 
 

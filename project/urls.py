@@ -20,6 +20,9 @@ from django.views.generic.base import TemplateView
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     # My django primary administry back-end
     path('admin/', admin.site.urls),
@@ -59,7 +62,7 @@ urlpatterns = [
     ## login interface
     path('accounts/', include('django.contrib.auth.urls')),
     
-    path('report-taq', views.file_upload, name='my-view'),
-    path('upload-test', views.my_view, name='my-view'),
+    path('report-taq', views.file_upload, name='file-upload'),
+    path('upload-test', views.file_upload, name='my-view'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

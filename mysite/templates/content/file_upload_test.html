@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}HomePage{% endblock %}
+{% block header %} Homepage{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+
+<div style="width:1500px; margin:0 auto;">
+    <table>
+        <tr bgcolor='#fdfbfc'><td>
+            
+            <!-- List of uploaded documents -->
+            {% if documents %}
+                All documents in the database:
+                <ul>
+                    {% for document in documents %}
+                        <li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No documents.</p>
+            {% endif %}     
+        </td></tr>
+    </table>
+    
+    <table>
+        <tr bgcolor='#fdfbfc'><td>
+            <!-- Upload form. Note enctype attribute! -->
+            <form action="{% url "my-view" %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ message }}
+                <p>{{ form.non_field_errors }}</p>
+
+                <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+
+                <p>
+                    {{ form.docfile.errors }}
+                    {{ form.docfile }}
+                </p>
+
+                <p><input type="submit" value="Upload"/></p>
+            </form>
+        </td></tr>
+    </table>
+</div>
+{% else %}
+    {% include "login_direction.html" %}
+{% endif %}
+        
+{% endblock %}
