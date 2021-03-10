@@ -1,14 +1,15 @@
-{% extends "base.html" %}
-
-{% block title %}HomePage{% endblock %}
-{% block header %} Homepage{% endblock %}
-
-{% block content %}
+    {% extends "base.html" %}
+    {% block title %} Upload test{% endblock %}
+    {% block bottum %} <a href="../homepage" class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:120%">Home</a> {% endblock %}
+    {% block header %} 上傳測試{% endblock %}
+    {% block content %}
+    {% load static %}
 
 
 {% if user.is_authenticated %}
 
 <div style="width:1500px; margin:0 auto;">
+    
     <table>
         <tr bgcolor='#fdfbfc'><td>
             
@@ -29,18 +30,20 @@
     <table>
         <tr bgcolor='#fdfbfc'><td>
             <!-- Upload form. Note enctype attribute! -->
-            <form action="{% url "my-view" %}" method="post" enctype="multipart/form-data">
+            <form action="{% url "read_file" %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ message }}
+                
                 <p>{{ form.non_field_errors }}</p>
-
+                
                 <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-
+                
                 <p>
                     {{ form.docfile.errors }}
                     {{ form.docfile }}
                 </p>
-
+                
+                <input class=input_type1  type="text" name="input" style="font-family:微軟正黑體;text-transform:initial;font-size:130%">
                 <p><input type="submit" value="Upload"/></p>
             </form>
         </td></tr>

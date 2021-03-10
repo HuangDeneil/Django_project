@@ -63,6 +63,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     
     path('report-taq', views.file_upload, name='file-upload'),
-    path('upload-test', views.file_upload, name='my-view'),
+    path('read_file', views.read_upload, name='read_file' ),
+    # path('upload-test', views.file_upload, name='my-view'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

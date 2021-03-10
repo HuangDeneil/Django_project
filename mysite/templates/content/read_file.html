@@ -1,0 +1,68 @@
+<!-- index.html (project project) -->
+    {% extends "base.html" %}
+    {% block title %} 物種資料庫{% endblock %}
+    
+    {% block bottum %} 
+    <a href="homepage" class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:120%">Home</a> 
+    <a href="search_engine" class="button" style="font-family:微軟正黑體;text-transform:initial;font-size:120%">Search engine</a> 
+    {% endblock %}
+    
+    {% block header %} Search result {% endblock %}
+    {% block content %}
+
+{% if user.is_authenticated %}
+
+<style>
+td, th {
+  border: 1px solid ##dddddd ;
+  text-align: left;
+  padding: 5px;
+}
+</style>
+
+
+<div id="wrapper" class="container">
+    <form name="table_value" method="GET" action="search_engine"> {% csrf_token %}
+        <table>
+            <tr bgcolor='#fdfbfc'>
+                <td style="font-family:微軟正黑體;text-transform:initial;font-size:170%">documents : </td>
+                <td style="font-family:微軟正黑體;text-transform:initial;font-size:170%">Input : {{ input_text }}</td>
+                <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%">查詢時間 : {{ now  }}</td>
+            </tr>
+            <tr bgcolor='{% cycle "#dadee8" "#fdfbfc" %}'>
+                <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%"></td>
+                <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%">file_name : {{file_name}}</td>
+                <td style="font-family:微軟正黑體;text-transform:initial;font-size:120%"></td>
+            </tr>
+        </table>
+        
+        {% if documents %}
+            All documents in the database:
+            <table>
+                <tr bgcolor='#fdfbfc'>
+                {% for document in documents %}
+                    <td> <a href="{{ document.docfile.url }}"> {{ document.docfile.name }}</a> {{document.docfile.url}}</td>
+                    <td> {{ document }}</td>
+                </tr>
+                <tr bgcolor='#fdfbfc'>
+                <td>
+                
+                </tr>
+                {% endfor %}
+                <tr bgcolor='#fdfbfc'>
+                <td>{{readline}}</td>
+                </tr>
+            </table>    
+        {% else %}
+            <p>No documents.</p>
+            
+        {% endif %} 
+        
+    </form>
+</div>
+
+{% else %}
+    {% include "login_direction.html" %}
+{% endif %}
+
+{% endblock %}

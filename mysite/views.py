@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, request
 from mysite import models
+# from mysite.models import models, Entry, Author
 from datetime import datetime
 from django.contrib import auth
 from django.contrib.auth import views as auth_views
@@ -20,7 +21,7 @@ import subprocess
 from django.shortcuts import redirect, render
 from .models import Document
 from .forms import DocumentForm
-
+from django.core.files.storage import default_storage
 
 ####################
 ###              ###
@@ -621,17 +622,19 @@ def statistics(request):
 
 
 def file_upload(request):
-    print(f"Great! You're using Python 3.6+. If you fail here, use the right version.")
-    message = 'Upload as many files as you want!'
+    # print(f"Great! You're using Python 3.6+. If you fail here, use the right version.")
+    message = 'Upload your file!'
     # Handle file upload
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             newdoc = Document(docfile=request.FILES['docfile'])
             newdoc.save()
-
+            
+            input_text = request.POST['input']
             # Redirect to the document list after POST
             return redirect('file-upload')
+
         else:
             message = 'The form is not valid. Fix the following error:'
     else:
@@ -646,6 +649,75 @@ def file_upload(request):
 
 
 
+
+
+
+def read_upload(request):
+    if request.method == 'POST':
+        now = datetime.now()
+        # category = request.POST['category']
+        input_text = request.POST['input']
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            newdoc = Document(docfile=request.FILES['docfile'])
+            newdoc.save()
+            
+            # Redirect to the document list after POST
+            #return redirect('read_file')
+        else:
+            message = 'The form is not valid. Fix the following error:'
+        file_name = newdoc.docfile
+        
+        documents = models.Document.objects.filter(docfile__contains=file_name)
+        # documents = models.Document.objects.all()[:]
+        #context = { 'form': form, 'message': message, 'input_text': input_text}
+        
+        # file_url = documents.docfile.url
+        
+        #
+        
+        # BASE_DIR =""
+
+        # my_file = documents
+        # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        # media_path = os.path.join(BASE_DIR, 'media')
+        # full_path = os.path.join( media_path, my_file)
+        # #print(full_path)
+        # f = default_storage.open(full_path, 'r')
+        # data = f.read()
+        # f.close()
+        # print(data)
+        
+        
+        # f = default_storage.open(full_path, 'r')
+        
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        media_path = os.path.join(BASE_DIR, 'media')
+        reads_file_name = (media_path+"/"+str(file_name))
+        with open(reads_file_name, mode = "r", encoding = "utf8") as file:
+            for i in file:
+                readline = i.rstrip()
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        return render(request, './content/read_file.html', locals())
+
+    else:
+        return redirect('file-upload')
+
+
+
+'''
 def my_view(request):
     print(f"Great! You're using Python 3.6+. If you fail here, use the right version.")
     message = 'Upload as many files as you want!'
@@ -669,3 +741,4 @@ def my_view(request):
     # Render list page with the documents and the form
     context = {'documents': documents, 'form': form, 'message': message}
     return render(request, 'list.html', locals())
+'''
