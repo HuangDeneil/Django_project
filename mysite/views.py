@@ -619,8 +619,12 @@ def statistics(request):
     return render(request, './content/statistics.html', locals())
 
 
-
-
+'''
+###################################
+#####                         #####
+#####   primary upload page   #####
+#####                         #####
+###################################
 def file_upload(request):
     # print(f"Great! You're using Python 3.6+. If you fail here, use the right version.")
     message = 'Upload your file!'
@@ -632,8 +636,13 @@ def file_upload(request):
             newdoc.save()
             
             input_text = request.POST['input']
-            # Redirect to the document list after POST
-            return redirect('file-upload')
+            
+            ########################################################
+            #####                                              #####
+            #####   Redirect to the document list after POST   #####
+            #####                                              #####
+            ########################################################
+            return redirect('file-upload')                 
 
         else:
             message = 'The form is not valid. Fix the following error:'
@@ -646,12 +655,16 @@ def file_upload(request):
     # Render list page with the documents and the form
     context = {'documents': documents, 'form': form, 'message': message}
     return render(request, './content/file_upload_test.html', locals())
+'''
 
 
+'''
 
-
-
-
+###################################
+#####                         #####
+#####   primary upload page   #####
+#####                         #####
+###################################
 def read_upload(request):
     if request.method == 'POST':
         now = datetime.now()
@@ -669,53 +682,34 @@ def read_upload(request):
         file_name = newdoc.docfile
         
         documents = models.Document.objects.filter(docfile__contains=file_name)
-        # documents = models.Document.objects.all()[:]
-        #context = { 'form': form, 'message': message, 'input_text': input_text}
-        
-        # file_url = documents.docfile.url
-        
-        #
-        
-        # BASE_DIR =""
-
-        # my_file = documents
-        # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        # media_path = os.path.join(BASE_DIR, 'media')
-        # full_path = os.path.join( media_path, my_file)
-        # #print(full_path)
-        # f = default_storage.open(full_path, 'r')
-        # data = f.read()
-        # f.close()
-        # print(data)
-        
-        
-        # f = default_storage.open(full_path, 'r')
         
         BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         media_path = os.path.join(BASE_DIR, 'media')
         reads_file_name = (media_path+"/"+str(file_name))
-        with open(reads_file_name, mode = "r", encoding = "utf8") as file:
-            for i in file:
-                readline = i.rstrip()
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        upload_file = pd.read_csv(reads_file_name)  
+
+        # k = 0
+        # data={}
+        # with open(reads_file_name, mode = "r", encoding = "utf8") as file:
+        #     for i in file:
+        #         readline = i.rstrip()
+                
+        #         try :
+        #             data[k] = str(readline)
+        #         except KeyError:
+        #             data[k] = str(readline)
+        #         k+=1
+        #         #
+        # data_keys = data.keys()
         
         return render(request, './content/read_file.html', locals())
 
     else:
         return redirect('file-upload')
 
-
+'''
 
 '''
 def my_view(request):

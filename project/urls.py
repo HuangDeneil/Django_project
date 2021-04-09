@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include,path
 from mysite import views
+from uploadfile import views as uploadview
 from django.views.generic.base import TemplateView
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
@@ -24,20 +25,40 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    # My django primary administry back-end
+    
+    ################################################
+    ###                                          ###
+    ###   My django primary administry back-end  ###
+    ###                                          ###
+    ################################################
     path('admin/', admin.site.urls),
     
-    # My root page
+    
+    ####################
+    ###              ###
+    ### My root page ###
+    ###              ###
+    ####################
     path('homepage', TemplateView.as_view(template_name='./content/home.html')),
     path('home', TemplateView.as_view(template_name='./content/home.html')),
     path('Home', TemplateView.as_view(template_name='./content/home.html')),
     path('', TemplateView.as_view(template_name='./content/home.html')),
     
-    ## view db
+    
+    ################
+    ###          ###
+    ###  view db ###
+    ###          ###
+    ################
     path('db', views.reference_summary),
     path('db/', views.reference_summary),
     
-    ## input new data for non-developer
+    
+    ##########################################
+    ###                                    ###
+    ###  input new data for non-developer  ###
+    ###                                    ###
+    ##########################################
     path('new_input',views.new_input),
     path('new_input/',views.new_input),
     path('new_input/input_check',views.new_input_check),
@@ -48,22 +69,47 @@ urlpatterns = [
 
     
     
-    ## search engine non-developer
+    ###################################
+    ###                             ###
+    ### search engine non-developer ###
+    ###                             ###
+    ###################################
     path('search_engine', TemplateView.as_view(template_name='./content/search_engine.html')),
     path('search_result', views.search_result),
     
-    # statistics 
-    path('statistics',views.statistics),
-    path('statistics/',views.statistics),
     
-    # manage 
+    ##################
+    ###            ###
+    ### statistics ###
+    ###            ###
+    ##################
+    path('statistics',views.statistics),
+    path('statistics/',views.statistics),\
+    
+    
+    ###############
+    ###         ###
+    ###  manage ###
+    ###         ###
+    ###############
     path('manage',TemplateView.as_view(template_name='./content/manage.html')),
 
-    ## login interface
+    #######################
+    ###                 ###
+    ### login interface ###
+    ###                 ###
+    #######################
     path('accounts/', include('django.contrib.auth.urls')),
     
-    path('report-taq', views.file_upload, name='file-upload'),
-    path('read_file', views.read_upload, name='read_file' ),
+    
+    
+    ############################
+    ###                      ###
+    ###  upload testing  url ###
+    ###                      ###
+    ############################
+    path('primary_upload_file', uploadview.file_upload, name='file-upload'),
+    path('check_upload_&_read_file', uploadview.read_upload, name='read_file' ),
     # path('upload-test', views.file_upload, name='my-view'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

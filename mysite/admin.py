@@ -31,11 +31,18 @@ class db_search_logAdmin(admin.ModelAdmin):
     search_fields=('user','input_word','category','date_time') 
 
 
+# class DocumentAdmin(admin.ModelAdmin):
+#     list_display=('docfile','upload_date') 
+#     search_fields=('docfile','upload_date') 
+
+
 admin.site.register(models.Specise, SpeciseAdmin)
 admin.site.register(models.scientific, scientificAdmin)
 admin.site.register(models.data_type, data_typeAdmin)
 admin.site.register(models.gene_info, gene_infoAdmin)
 admin.site.register(models.reference_summary, reference_summaryAdmin)
 admin.site.register(models.db_search_log, db_search_logAdmin)
+# admin.site.register(models.Document,  DocumentAdmin)
+
 
 
